@@ -1,6 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
+
+        <!-- School Logo -->
+        <ImageView
+            android:id="@+id/schoolLogo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/studen"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/school_logo"
+            android:layout_marginTop="20dp" />
+
+        <!-- Welcome Heading -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/elearnig_portal"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_please_login_to_continue"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Student Name -->
+        <EditText
+            android:id="@+id/studentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_student_name"
+            android:inputType="textPersonName"
+            android:singleLine="true" />
+
+        <!-- Student Email -->
+        <EditText
+            android:id="@+id/studentEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_student_email"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:layout_marginTop="12dp" />
+
+        <!-- Access Password -->
+        <EditText
+            android:id="@+id/accessPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_access_password"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:layout_marginTop="12dp" />
+
+        <!-- Remember Me -->
+        <CheckBox
+            android:id="@+id/rememberMe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/remember_me"
+            android:layout_marginTop="12dp" />
+
+        <!-- Submit and Cancel Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/submit" />
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cancel"
+                android:layout_marginStart="12dp" />
+
+        </LinearLayout>
+
+        <!-- Forgot Password -->
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_password"
+            android:textColor="#1565C0"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="12dp" />
+
+        <!-- Login Progress -->
+        <ProgressBar
+            android:id="@+id/loginProgress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="16dp" />
+
+        <!-- Status Message -->
+        <TextView
+            android:id="@+id/statusMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginTop="12dp" />
+
+    </LinearLayout>
+
+</ScrollView>
