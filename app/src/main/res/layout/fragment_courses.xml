@@ -56,7 +56,6 @@
         android:paddingHorizontal="14dp"
         android:textSize="14sp"
         android:textColor="@color/text_primary"
-        android:hintTextColor="@color/text_secondary"
         android:background="@drawable/bg_login_input"
         android:contentDescription="Search available courses"/>
 
