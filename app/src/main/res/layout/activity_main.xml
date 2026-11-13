@@ -14,7 +14,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/surface"
         android:elevation="3dp"
-        app:title="Northstar University"
+        app:title="@string/elearnig_portal"
         app:titleTextColor="@color/primary"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
         app:layout_constraintTop_toTopOf="parent"

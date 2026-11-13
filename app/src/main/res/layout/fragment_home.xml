@@ -20,11 +20,11 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- University Branding -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NORTHSTAR UNIVERSITY"
+                android:text="@string/elearnig_portal"
                 android:textColor="@color/primary"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
