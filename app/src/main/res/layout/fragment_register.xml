@@ -1,6 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
+    android:overScrollMode="never">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- University Branding -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NORTHSTAR UNIVERSITY"
+            android:textColor="@color/primary"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Empowering Minds, Inspiring Excellence."
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Form Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Student Registration"
+                    android:textColor="@color/primary"
+                    android:textSize="23sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enter your details to begin enrollment."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:layout_marginTop="6dp"/>
+
+            </LinearLayout>
+
+            <!-- Popup Menu Button -->
+            <ImageButton
+                android:id="@+id/registerMenuButton"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_more"
+                android:contentDescription="Registration options"
+                android:tint="@color/primary"/>
+
+        </LinearLayout>
+
+        <!-- Registration Form Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="@drawable/bg_login_card"
+            android:elevation="3dp">
+
+            <!-- Full Name -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full Name"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginBottom="7dp"/>
+
+            <EditText
+                android:id="@+id/registerFullName"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Enter your full name"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:paddingHorizontal="14dp"
+                android:textSize="14sp"
+                android:background="@drawable/bg_login_input"/>
+
+            <!-- Course -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enrolled Course"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="7dp"/>
+
+            <EditText
+                android:id="@+id/registerCourse"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Enter your course"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:paddingHorizontal="14dp"
+                android:textSize="14sp"
+                android:background="@drawable/bg_login_input"/>
+
+            <!-- Age -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="7dp"/>
+
+            <EditText
+                android:id="@+id/registerAge"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Enter your age"
+                android:inputType="number"
+                android:maxLength="3"
+                android:singleLine="true"
+                android:paddingHorizontal="14dp"
+                android:textSize="14sp"
+                android:background="@drawable/bg_login_input"/>
+
+            <!-- Gender -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="7dp"/>
+
+            <Spinner
+                android:id="@+id/genderSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_login_input"
+                android:paddingHorizontal="10dp"
+                android:entries="@array/gender_options"/>
+
+            <!-- Study Mode -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Study Mode"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginTop="17dp"/>
+
+            <RadioGroup
+                android:id="@+id/studyModeGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/fullTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Full-time"
+                    android:textColor="@color/text_secondary"
+                    android:buttonTint="@color/primary_button"/>
+
+                <RadioButton
+                    android:id="@+id/partTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Part-time"
+                    android:textColor="@color/text_secondary"
+                    android:buttonTint="@color/primary_button"
+                    android:layout_marginStart="18dp"/>
+
+            </RadioGroup>
+
+            <!-- Year of Study -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Year of Study"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginTop="17dp"/>
+
+            <TextView
+                android:id="@+id/yearValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Year 1"
+                android:textColor="@color/primary_button"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginTop="6dp"/>
+
+            <SeekBar
+                android:id="@+id/yearSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="3"
+                android:progress="0"
+                android:progressTint="@color/primary_button"
+                android:thumbTint="@color/primary_button"/>
+
+            <!-- Terms -->
+            <CheckBox
+                android:id="@+id/termsCheckbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I agree to the terms and conditions"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:buttonTint="@color/primary_button"
+                android:layout_marginTop="14dp"/>
+
+            <!-- Register Button -->
+            <Button
+                android:id="@+id/registerStudentButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Register Student"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="@color/primary_button"
+                android:layout_marginTop="22dp"/>
+
+            <!-- View Students Button -->
+            <Button
+                android:id="@+id/viewStudentsButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="View Registered Students"
+                android:textAllCaps="false"
+                android:textColor="@color/primary"
+                android:backgroundTint="@color/soft_blue"
+                android:layout_marginTop="12dp"/>
+
+        </LinearLayout>
+
+        <!-- Footer -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="NORTHSTAR UNIVERSITY"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:letterSpacing="0.15"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

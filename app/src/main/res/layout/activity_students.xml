@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:padding="20dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- University Branding -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NORTHSTAR UNIVERSITY"
+        android:textColor="@color/primary"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Empowering Minds, Inspiring Excellence."
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Screen Heading -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registered Students"
+        android:textColor="@color/primary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="28dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manage and view enrolled student records."
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Student Count -->
+    <TextView
+        android:id="@+id/studentCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registered Students"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Empty State -->
+    <TextView
+        android:id="@+id/emptyStudentsMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No students registered yet."
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:padding="20dp"
+        android:visibility="gone"/>
+
+    <!-- Student Records List -->
+    <ListView
+        android:id="@+id/registeredStudentsList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="12dp"
+        android:background="@android:color/transparent"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"/>
+
+    <!-- Delete All Button -->
+    <Button
+        android:id="@+id/deleteAllStudentsButton"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Delete All Students"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/error"
+        android:layout_marginTop="14dp"/>
+
+</LinearLayout>

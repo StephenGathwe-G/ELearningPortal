@@ -1,6 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
+    android:overScrollMode="never">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- University Branding -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NORTHSTAR UNIVERSITY"
+            android:textColor="@color/primary"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <!-- Heading -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textColor="@color/primary"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="28dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Customize your student portal experience."
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- General Preferences Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:background="@drawable/bg_login_card"
+            android:elevation="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="General Preferences"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="14dp"/>
+
+            <!-- Notifications -->
+            <Switch
+                android:id="@+id/notificationSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enable Notifications"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:showText="false"
+                android:thumbTint="@color/primary_button"
+                android:trackTint="@color/soft_blue"
+                android:paddingVertical="8dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/border"
+                android:layout_marginVertical="12dp"/>
+
+            <!-- Dark Mode -->
+            <CheckBox
+                android:id="@+id/darkModeCheckbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dark Mode"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:buttonTint="@color/primary_button"
+                android:paddingVertical="8dp"/>
+
+        </LinearLayout>
+
+        <!-- Account Preferences -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:background="@drawable/bg_login_card"
+            android:elevation="2dp"
+            android:layout_marginTop="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account Preferences"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="14dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Preferred Username"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="7dp"/>
+
+            <EditText
+                android:id="@+id/preferredUsername"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Enter preferred username"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:paddingHorizontal="14dp"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:background="@drawable/bg_login_input"/>
+
+        </LinearLayout>
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/saveSettingsButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Save Settings"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/primary_button"
+            android:layout_marginTop="24dp"/>
+
+        <!-- Reset Button -->
+        <Button
+            android:id="@+id/resetSettingsButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Reset to Default"
+            android:textAllCaps="false"
+            android:textColor="@color/primary"
+            android:backgroundTint="@color/soft_blue"
+            android:layout_marginTop="12dp"/>
+
+        <!-- Footer -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="NORTHSTAR UNIVERSITY"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:letterSpacing="0.15"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

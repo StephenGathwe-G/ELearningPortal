@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:background="@drawable/bg_login_card"
+    android:elevation="2dp">
+
+    <!-- Course Image -->
+    <ImageView
+        android:id="@+id/courseImage"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:src="@android:drawable/ic_menu_agenda"
+        android:scaleType="centerCrop"
+        android:background="@color/soft_blue"
+        android:padding="12dp"
+        android:contentDescription="Course image"/>
+
+    <!-- Course Information -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="14dp">
+
+        <TextView
+            android:id="@+id/courseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Computer Science"
+            android:textColor="@color/primary"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:maxLines="2"/>
+
+        <TextView
+            android:id="@+id/courseDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Explore software development, computing and modern technology."
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginTop="6dp"
+            android:maxLines="3"/>
+
+    </LinearLayout>
+
+</LinearLayout>

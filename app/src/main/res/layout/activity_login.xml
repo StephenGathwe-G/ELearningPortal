@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@color/background"
+    android:overScrollMode="never">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,124 +14,199 @@
         android:gravity="center_horizontal"
         android:padding="24dp">
 
-        <!-- School Logo -->
+        <!-- University Branding -->
         <ImageView
             android:id="@+id/schoolLogo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/studen"
             android:scaleType="fitCenter"
             android:contentDescription="@string/school_logo"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="32dp" />
 
-        <!-- Welcome Heading -->
+        <!-- Portal Heading -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/elearnig_portal"
-            android:textSize="26sp"
+            android:textColor="@color/primary"
+            android:textSize="27sp"
             android:textStyle="bold"
+            android:fontFamily="sans"
             android:layout_marginTop="20dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/welcome_please_login_to_continue"
-            android:textSize="16sp"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:gravity="center"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="28dp" />
 
-        <!-- Student Name -->
-        <EditText
-            android:id="@+id/studentName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_student_name"
-            android:inputType="textPersonName"
-            android:singleLine="true" />
-
-        <!-- Student Email -->
-        <EditText
-            android:id="@+id/studentEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_student_email"
-            android:inputType="textEmailAddress"
-            android:singleLine="true"
-            android:layout_marginTop="12dp" />
-
-        <!-- Access Password -->
-        <EditText
-            android:id="@+id/accessPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_access_password"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:layout_marginTop="12dp" />
-
-        <!-- Remember Me -->
-        <CheckBox
-            android:id="@+id/rememberMe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/remember_me"
-            android:layout_marginTop="12dp" />
-
-        <!-- Submit and Cancel Buttons -->
+        <!-- Login Form Container -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="@drawable/bg_login_card"
+            android:elevation="3dp">
 
-            <Button
-                android:id="@+id/submitButton"
-                android:layout_width="0dp"
+            <!-- Student Name -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/submit" />
+                android:text="Student Name"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginBottom="6dp"/>
 
-            <Button
-                android:id="@+id/cancelButton"
-                android:layout_width="0dp"
+            <EditText
+                android:id="@+id/studentName"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="@string/enter_student_name"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:paddingHorizontal="14dp"
+                android:textSize="14sp"
+                android:background="@drawable/bg_login_input"/>
+
+            <!-- Student Email -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/cancel"
-                android:layout_marginStart="12dp" />
+                android:text="Student Email"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"/>
+
+            <EditText
+                android:id="@+id/studentEmail"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="@string/enter_student_email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:paddingHorizontal="14dp"
+                android:textSize="14sp"
+                android:background="@drawable/bg_login_input"/>
+
+            <!-- Password -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Access Password"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"/>
+
+            <EditText
+                android:id="@+id/accessPassword"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="@string/enter_access_password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:paddingHorizontal="14dp"
+                android:textSize="14sp"
+                android:background="@drawable/bg_login_input"/>
+
+            <!-- Remember Me -->
+            <CheckBox
+                android:id="@+id/rememberMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remember_me"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:layout_marginTop="12dp"/>
+
+            <!-- Submit and Cancel -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="18dp">
+
+                <Button
+                    android:id="@+id/submitButton"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:text="@string/submit"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="@color/primary_button"/>
+
+                <Button
+                    android:id="@+id/cancelButton"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/soft_blue"/>
+
+            </LinearLayout>
+
+            <!-- Forgot Password -->
+            <TextView
+                android:id="@+id/forgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/forgot_password"
+                android:textColor="@color/primary_button"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:padding="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Login Progress -->
+            <ProgressBar
+                android:id="@+id/loginProgress"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/primary_button"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"/>
+
+            <!-- Status Message -->
+            <TextView
+                android:id="@+id/statusMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="10dp"/>
 
         </LinearLayout>
 
-        <!-- Forgot Password -->
+        <!-- Footer -->
         <TextView
-            android:id="@+id/forgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/forgot_password"
-            android:textColor="#1565C0"
-            android:textSize="16sp"
-            android:padding="12dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_marginTop="12dp" />
-
-        <!-- Login Progress -->
-        <ProgressBar
-            android:id="@+id/loginProgress"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_marginTop="16dp" />
-
-        <!-- Status Message -->
-        <TextView
-            android:id="@+id/statusMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:layout_marginTop="12dp" />
+            android:text="STUDENT PORTAL"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:letterSpacing="0.15"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
 

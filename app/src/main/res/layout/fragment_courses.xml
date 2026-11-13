@@ -1,6 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:padding="20dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- University Branding -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NORTHSTAR UNIVERSITY"
+        android:textColor="@color/primary"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Empowering Minds, Inspiring Excellence."
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Page Heading -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Available Department Courses"
+        android:textColor="@color/primary"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:layout_marginTop="28dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Discover academic programs and find the right path for your future."
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Search Field -->
+    <EditText
+        android:id="@+id/courseSearch"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:hint="Search courses..."
+        android:inputType="text"
+        android:singleLine="true"
+        android:drawableStart="@android:drawable/ic_menu_search"
+        android:drawablePadding="10dp"
+        android:paddingHorizontal="14dp"
+        android:textSize="14sp"
+        android:textColor="@color/text_primary"
+        android:hintTextColor="@color/text_secondary"
+        android:background="@drawable/bg_login_input"
+        android:contentDescription="Search available courses"/>
+
+    <!-- Course List Heading -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Explore Programs"
+        android:textColor="@color/text_primary"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- ListView -->
+    <ListView
+        android:id="@+id/coursesListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="12dp"
+        android:background="@android:color/transparent"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
+        android:scrollbars="vertical"/>
+
+    <!-- Refresh Button -->
+    <Button
+        android:id="@+id/refreshCoursesButton"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Refresh Courses"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/primary_button"
+        android:drawableStart="@android:drawable/ic_popup_sync"
+        android:drawablePadding="8dp"
+        android:layout_marginTop="12dp"/>
+
+</LinearLayout>
