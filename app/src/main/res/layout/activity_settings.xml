@@ -15,33 +15,31 @@
 
         <!-- University Branding -->
         <TextView
+            android:id="@+id/settingsBrand"
+            style="@style/PortalBrandStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/elearnig_portal"
-            android:textColor="@color/primary"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:text="@string/elearnig_portal"/>
 
-        <!-- Heading -->
+        <!-- Settings Heading -->
         <TextView
+            android:id="@+id/settingsTitle"
+            style="@style/PortalHeadingStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings"
-            android:textColor="@color/primary"
-            android:textSize="26sp"
-            android:textStyle="bold"
             android:layout_marginTop="28dp"/>
 
         <TextView
+            android:id="@+id/settingsDescription"
+            style="@style/PortalDescriptionStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/customize_your_student_portal_experience"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="24dp"/>
 
-        <!-- General Preferences Card -->
+        <!-- General Preferences -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,23 +52,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/general_preferences"
-                android:textColor="@color/primary"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                style="@style/PortalSectionStyle"
                 android:layout_marginBottom="14dp"/>
 
-            <!-- Notifications -->
             <Switch
                 android:id="@+id/notificationSwitch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enable Notifications"
+                android:text="@string/enable_notifications"
                 android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:showText="false"
-                android:thumbTint="@color/primary_button"
-                android:trackTint="@color/soft_blue"
-                android:paddingVertical="8dp"/>
+                android:paddingVertical="8dp"
+                android:buttonTint="@color/primary_button"/>
 
             <View
                 android:layout_width="match_parent"
@@ -78,16 +70,14 @@
                 android:background="@color/border"
                 android:layout_marginVertical="12dp"/>
 
-            <!-- Dark Mode -->
             <CheckBox
                 android:id="@+id/darkModeCheckbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dark Mode"
+                android:text="@string/dark_mode"
                 android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:buttonTint="@color/primary_button"
-                android:paddingVertical="8dp"/>
+                android:paddingVertical="8dp"
+                android:buttonTint="@color/primary_button"/>
 
         </LinearLayout>
 
@@ -105,9 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/account_preferences"
-                android:textColor="@color/primary"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                style="@style/PortalSectionStyle"
                 android:layout_marginBottom="14dp"/>
 
             <TextView
@@ -121,39 +109,31 @@
 
             <EditText
                 android:id="@+id/preferredUsername"
+                style="@style/PortalInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:hint="Enter preferred username"
+                android:hint="@string/enter_preferred_username"
                 android:inputType="textPersonName"
-                android:singleLine="true"
-                android:paddingHorizontal="14dp"
-                android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:background="@drawable/bg_login_input"/>
+                android:singleLine="true"/>
 
         </LinearLayout>
 
-        <!-- Save Button -->
+        <!-- Save Settings -->
         <Button
             android:id="@+id/saveSettingsButton"
+            style="@style/PortalPrimaryButton"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:text="Save Settings"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="@color/primary_button"
+            android:text="@string/save_settings"
             android:layout_marginTop="24dp"/>
 
-        <!-- Reset Button -->
+        <!-- Reset Settings -->
         <Button
             android:id="@+id/resetSettingsButton"
+            style="@style/PortalSecondaryButton"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:text="Reset to Default"
-            android:textAllCaps="false"
-            android:textColor="@color/primary"
-            android:backgroundTint="@color/soft_blue"
+            android:text="@string/reset_to_default"
             android:layout_marginTop="12dp"/>
 
         <!-- Footer -->
