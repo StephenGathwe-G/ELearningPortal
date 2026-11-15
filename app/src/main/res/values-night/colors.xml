@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <color name="primary">#8BAFF5</color>
+    <color name="primary_button">#3974D5</color>
+    <color name="secondary">#42C4B8</color>
+
+    <color name="background">#101827</color>
+    <color name="surface">#19263A</color>
+    <color name="soft_blue">#263A59</color>
+
+    <color name="text_primary">#F4F7FC</color>
+    <color name="text_secondary">#B0BDCF</color>
+    <color name="border">#304057</color>
+
+    <color name="success">#55C995</color>
+    <color name="warning">#F0BF63</color>
+    <color name="error">#F17C83</color>
+</resources>

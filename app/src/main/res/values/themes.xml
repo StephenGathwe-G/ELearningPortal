@@ -1,9 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ELearningPortal" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <style name="Base.Theme.ELearningPortal"
+        parent="Theme.Material3.DayNight.NoActionBar">
+
+
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/surface</item>
+
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/surface</item>
+
+        <item name="colorTertiary">@color/primary_button</item>
+
+        <!-- Background Colors -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:windowLightStatusBar">false</item>
+<!--        <item name="android:windowLightNavigationBar">true</item>-->
+
     </style>
 
-    <style name="Theme.ELearningPortal" parent="Base.Theme.ELearningPortal" />
+    <style name="Theme.ELearningPortal"
+        parent="Base.Theme.ELearningPortal" />
+
 </resources>

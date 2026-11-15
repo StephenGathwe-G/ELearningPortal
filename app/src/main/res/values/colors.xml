@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="accent">#1976D2</color>
-    <color name="primary"></color>
-    <color name="secondary"></color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#233F78</color>
+    <color name="primary_button">#3974D5</color>
+    <color name="secondary">#18A6A0</color>
+
+    <color name="background">#F5F7FB</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="soft_blue">#EAF0FA</color>
+
+    <color name="text_primary">#17243A</color>
+    <color name="text_secondary">#65738A</color>
+    <color name="border">#E1E7F0</color>
+
+    <color name="success">#21865B</color>
+    <color name="warning">#D69A32</color>
+    <color name="error">#D64F57</color>
 </resources>

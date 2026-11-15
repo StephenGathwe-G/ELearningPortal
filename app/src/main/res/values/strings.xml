@@ -11,4 +11,28 @@
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="age">Age</string>
+    <string name="course">Enter your course</string>
+    <string name="enrolled">Enrolled Course</string>
+    <string name="motto">Empowering Minds, Inspiring Excellence.</string>
+    <string name="enroll_details">Enter your details to begin enrollment.</string>
+    <string name="gender">Gender</string>
+    <string name="full_name">Full Name</string>
+    <string name="new_student_registration">New Student Registration</string>
+    <string name="study_mode">Study Mode</string>
+    <string name="year_of_study">Year of Study</string>
+    <string name="full_time">Full-time</string>
+    <string name="part_time">Part-time</string>
+    <string name="enter_your_age">Enter your age</string>
+    <string name="register_student">Register Student</string>
+    <string name="i_agree_to_the_terms_and_conditions">I agree to the terms and conditions</string>
+    <string name="year_1">Year 1</string>
+    <string name="view_registered_students">View Registered Students</string>
+    <string name="online">Online</string>
+    <string-array name="gender_options">
+        <item>Select Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Prefer not to say</item>
+    </string-array>
 </resources>
