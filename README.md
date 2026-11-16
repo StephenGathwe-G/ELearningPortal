@@ -82,7 +82,7 @@ val db = AppDatabase.getInstance(this)  // 'this' can be any Context
 |`password_hash`|`TEXT`|`NOT NULL`, Base64-encoded PBKDF2 hash|
 |`salt`|`TEXT`|`NOT NULL`, Base64-encoded random 16-byte salt|
 
-Passwords are **never stored in plain text**. See [Authentication](https://claude.ai/chat/a3c02687-7ad1-4a27-a599-24fe6765fb27#authentication--user-accounts).
+Passwords are **never stored in plain text**.
 
 ---
 
@@ -149,8 +149,7 @@ val cursor: Cursor = db.queryAll()
 ```
 
 - Returns a `Cursor` sorted by `id` ascending.
-- **You must close the cursor** when done (see [Cursor Lifecycle](https://claude.ai/chat/a3c02687-7ad1-4a27-a599-24fe6765fb27#cursor-lifecycle)).
-
+- **You must close the cursor** when done.
 ---
 
 ### 5. Query a Single Row by ID
