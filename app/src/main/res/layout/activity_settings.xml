@@ -14,12 +14,12 @@
         android:padding="20dp">
 
         <!-- University Branding -->
-        <TextView
-            android:id="@+id/settingsBrand"
-            style="@style/PortalBrandStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/elearnig_portal"/>
+<!--        <TextView-->
+<!--            android:id="@+id/settingsBrand"-->
+<!--            style="@style/PortalBrandStyle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/elearnig_portal"/>-->
 
         <!-- Settings Heading -->
         <TextView

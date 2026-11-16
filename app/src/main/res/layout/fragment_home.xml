@@ -21,13 +21,13 @@
             android:padding="20dp">
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/elearnig_portal"
-                android:textColor="@color/primary"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/elearnig_portal"-->
+<!--                android:textColor="@color/primary"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold"/>-->
 
             <!-- Welcome Section -->
             <TextView
@@ -139,14 +139,14 @@
 
     </ScrollView>
 
-    <!-- Persistent Bottom Navigation -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/surface"
-        app:itemIconTint="@color/primary"
-        app:itemTextColor="@color/primary"
-        app:menu="@menu/bottom_navigation"/>
+<!--    &lt;!&ndash; Persistent Bottom Navigation &ndash;&gt;-->
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottomNavigation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/surface"-->
+<!--        app:itemIconTint="@color/primary"-->
+<!--        app:itemTextColor="@color/primary"-->
+<!--        app:menu="@menu/bottom_navigation"/>-->
 
 </LinearLayout>

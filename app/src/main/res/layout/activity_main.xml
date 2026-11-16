@@ -26,7 +26,6 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:name="androidx.fragment.app.Fragment"
         android:background="@color/background"
         app:layout_constraintTop_toBottomOf="@id/mainToolbar"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
