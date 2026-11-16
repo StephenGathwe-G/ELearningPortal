@@ -29,6 +29,8 @@
     <string name="year_1">Year 1</string>
     <string name="view_registered_students">View Registered Students</string>
     <string name="online">Online</string>
+    <string name="menu">menu</string>
+    <string name="login_subtitle">Sign in to continue learning</string>
     <string-array name="gender_options">
         <item>Select Gender</item>
         <item>Male</item>
