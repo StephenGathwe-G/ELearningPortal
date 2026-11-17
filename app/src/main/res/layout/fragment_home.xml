@@ -1,6 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+
+    android:background="@color/backgroundColor">
+
+    <TextView
+        android:id="@+id/tvSchoolName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="CAMBRIDGE UNIVERSITY"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/primaryColor"
+        android:gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="24dp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- School Mission -->
+    <TextView
+        android:id="@+id/tvMission"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Empowering students through quality education, innovation and excellence."
+        android:textSize="16sp"
+        android:textColor="@color/textColor"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="12dp"
+
+        app:layout_constraintTop_toBottomOf="@id/tvSchoolName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Campus Image -->
+    <ImageView
+        android:id="@+id/imgCampus"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:src="@drawable/campus_building"
+        android:scaleType="centerCrop"
+        android:background="@color/primaryLightColor"
+        android:contentDescription="School campus"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+
+        app:layout_constraintTop_toBottomOf="@id/tvMission"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Welcome Message -->
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Welcome, Student!"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/primaryColor"
+        android:gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+
+        app:layout_constraintTop_toBottomOf="@id/imgCampus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Last Login -->
+    <TextView
+        android:id="@+id/tvLastLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Last login: Not available"
+        android:textSize="14sp"
+        android:textColor="@color/textSecondaryColor"
+        android:gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="12dp"
+
+        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
