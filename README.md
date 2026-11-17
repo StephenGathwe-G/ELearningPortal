@@ -2,7 +2,7 @@
 
 **1. Project Overview**
    
-This branch contains the initial skeleton of the ELearnigPortal Android application, developed using Android Studio as part of the Android Application Development group project.
+This branch contains the initial skeleton of the ELearnigPortal Android application, developed as part of the Android Application Development project.
 
 The purpose of this implementation was to establish the application's initial user interface, screen structure, and basic navigation flow based on the project requirements.
 
