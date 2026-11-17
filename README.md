@@ -1,15 +1,16 @@
-ELearningPortal – Initial Skeleton (Reference Only)
-1. Project Overview
+**ELearningPortal – Initial Skeleton (Reference Only)**
 
+**1. Project Overview**
+   
 This branch contains the initial skeleton of the ELearnigPortal Android application, developed using Android Studio as part of the Android Application Development group project.
 
 The purpose of this implementation was to establish the application's initial user interface, screen structure, and basic navigation flow based on the project requirements.
 
 The application provides a starting point for the team to reference when developing the complete ELearnigPortal system.
 
-2. Current Implementation Status
+**2. Current Implementation Status**
 
-Status: Initial UI Skeleton Completed
+**Status: Initial UI Skeleton Completed**
 
 The following parts have been implemented:
 
@@ -22,11 +23,12 @@ Initial visual structure and layout styling.
 
 Important: The UI and some basic navigation functionality are working. However, no database integration or other major application functionality has been implemented.
 
-The current implementation does not include the backend functionality required by the project specifications.
+**The current implementation does not include the backend functionality required by the project specifications.**
 
-3. Outstanding Implementation Requirements
 
-The following functionalities have not yet been implemented and will need to be addressed during the team's development:
+**3. Outstanding Implementation Requirements**
+
+The following functionalities have not yet been implemented and will need to be addressed during the final development:
 
 Database: SQLite database creation and CRUD operations.
 Content Provider: Student data access through a ContentProvider and ContentResolver.
@@ -41,9 +43,9 @@ Settings and Preferences: Persistent settings, notification preferences, and dar
 Menus: Complete options menu, context menu, and popup menu functionality.
 Testing: Unit tests, manual testing, debugging, and lifecycle logging.
 
-These features should be implemented and tested as part of the complete group project.
+These features should be implemented and tested as part of the complete project.
 
-4. Purpose of This Branch
+**4. Purpose of This Branch**
 
 This branch is intended strictly for reference purposes.
 
@@ -55,19 +57,21 @@ Review the initial UI designs and XML layouts.
 Reference the screen organization and navigation structure.
 Reuse or adapt relevant UI components where appropriate.
 Understand the initial application structure before implementing additional functionality.
-5. Branch Management Instructions
 
-IMPORTANT: DO NOT MERGE THIS BRANCH INTO main.
+**5. Branch Management Instructions**
 
-This branch should remain separate from the main development branch.
+**IMPORTANT: DO NOT MERGE THIS BRANCH INTO main.**
+
+**This branch should remain separate from the main development branch.**
 
 Do not create a merge request or pull request to merge this branch into main.
-Do not use this branch as the final project submission.
-Keep it available as a reference for the ongoing development.
+
+Do not treat this branch as the final project.
+Keep it available as a reference .
 
 The intention is to preserve this initial skeleton independently without affecting the main project codebase.
 
-6. Final Notes
+**6. Final Notes**
 
 This implementation represents the initial UI and structural foundation of the ELearnigPortal application, not the completed project.
 
