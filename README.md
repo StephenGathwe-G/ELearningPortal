@@ -78,3 +78,8 @@ This implementation represents the initial UI and structural foundation of the E
 Although the user interface and some basic navigation are functional, the database, backend integration, and other required Android components are yet to be implemented.
 
 The team should use this branch as a reference when building the complete application in accordance with the provided project specifications.
+
+credentials for hardcoded login
+username : devin
+email    :devin@gmail.com
+password :123456
