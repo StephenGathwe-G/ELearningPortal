@@ -127,7 +127,7 @@ public class CoursesFragment extends Fragment {
         allCourses.add(new Course(
                 "Computer Science",
                 "Study of programming, algorithms and computing.",
-                R.drawable.data_science));
+                R.drawable.brain));
 
         allCourses.add(new Course(
                 "Software Engineering",
@@ -137,17 +137,17 @@ public class CoursesFragment extends Fragment {
         allCourses.add(new Course(
                 "Information Technology",
                 "Study computer systems and IT support.",
-                R.drawable.it));
+                R.drawable.tech));
 
         allCourses.add(new Course(
                 "Business Information Systems",
                 "Learn how technology supports business operations.",
-                R.drawable.bbit));
+                R.drawable.consultant));
 
         allCourses.add(new Course(
                 "Computer Networking",
                 "Study network infrastructure and communication.",
-                R.drawable.network_configuration));
+                R.drawable.software_application));
 
         filteredCourses.clear();
         filteredCourses.addAll(allCourses);
