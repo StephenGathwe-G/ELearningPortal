@@ -12,6 +12,7 @@ import com.example.elearningportal.database.AppDatabase
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var db: AppDatabase
+    private lateinit var session: SessionManager
     private lateinit var etName: EditText
     private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText
@@ -24,12 +25,19 @@ class LoginActivity : AppCompatActivity() {
 
     private val prefs by lazy { getSharedPreferences(PREFS_NAME, MODE_PRIVATE) }
 
-    // Background operations (same pattern as RegisterActivity)
     private val executor: ExecutorService =
         Executors.newSingleThreadExecutor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Already logged in? Skip the login screen.
+        session = SessionManager(this)
+        if (session.isLoggedIn()) {
+            navigateToMain(session.userName)
+            return
+        }
+
         setContentView(R.layout.activity_login)
 
         db = AppDatabase.getInstance(this)
@@ -44,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Initialize views
         etName = findViewById(R.id.etName)
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
@@ -53,24 +60,17 @@ class LoginActivity : AppCompatActivity() {
         btnCancel = findViewById(R.id.btnCancel)
         tvForgot = findViewById(R.id.tvForgot)
         progressBar = findViewById(R.id.progressBar)
-        //loginMenuButton = findViewById(R.id.loginMenuButton)
+        // loginMenuButton = findViewById(R.id.loginMenuButton)
 
         restoreSavedCredentials()
 
-        // Login button
         btnSubmit.setOnClickListener { loginUser() }
-
-        // Cancel button
         btnCancel.setOnClickListener { clearForm() }
-
-        // Forgot password
         tvForgot.setOnClickListener { handleForgotPassword() }
 
-        // Popup menu
-        setupPopupMenu()
+        //setupPopupMenu()
     }
 
-    // Restore saved credentials
     private fun restoreSavedCredentials() {
         if (prefs.getBoolean(KEY_REMEMBER, false)) {
             etName.setText(prefs.getString(KEY_NAME, ""))
@@ -80,20 +80,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser() {
-
         val name = etName.text.toString().trim()
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString()
         val remember = cbRemember.isChecked
 
-        // Validate name
         if (name.isEmpty()) {
             etName.error = "Enter your full name"
             etName.requestFocus()
             return
         }
 
-        // Validate email
         if (email.isEmpty()) {
             etEmail.error = "Enter your email"
             etEmail.requestFocus()
@@ -106,7 +103,6 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        // Validate password
         if (password.isEmpty()) {
             etPassword.error = "Enter your password"
             etPassword.requestFocus()
@@ -120,12 +116,9 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        // Prevent multiple submissions
         setLoading(true)
 
-        // Authenticate on background thread
         executor.execute {
-
             val userName = try {
                 authenticate(email, password)
             } catch (e: Exception) {
@@ -133,17 +126,17 @@ class LoginActivity : AppCompatActivity() {
             }
 
             runOnUiThread {
-
                 if (isFinishing || isDestroyed) return@runOnUiThread
 
                 setLoading(false)
 
                 if (userName != null) {
+                    // Credentials confirmed: start the session, then redirect.
+                    session.createSession(userName, email)
                     saveCredentials(remember, userName, email)
 
                     Toast.makeText(this, "Welcome, $userName!", Toast.LENGTH_SHORT).show()
                     navigateToMain(userName)
-
                 } else {
                     etPassword.text?.clear()
                     Toast.makeText(
@@ -194,7 +187,6 @@ class LoginActivity : AppCompatActivity() {
         btnSubmit.isEnabled = !loading
     }
 
-    // Clear login form
     private fun clearForm() {
         etName.text.clear()
         etEmail.text.clear()
@@ -205,27 +197,21 @@ class LoginActivity : AppCompatActivity() {
         etPassword.error = null
     }
 
-    // Popup menu implementation
     private fun setupPopupMenu() {
+        // Skip if the menu button isn't wired up (avoids UninitializedPropertyAccessException)
+        if (!::loginMenuButton.isInitialized) return
 
         loginMenuButton.setOnClickListener { view ->
-
             val popup = PopupMenu(this, view)
 
             popup.menu.add("Clear Form")
             popup.menu.add("Load Sample Data")
 
             popup.setOnMenuItemClickListener { item ->
-
                 when (item.title.toString()) {
-
                     "Clear Form" -> {
                         clearForm()
-                        Toast.makeText(
-                            this,
-                            "Form cleared",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this, "Form cleared", Toast.LENGTH_SHORT).show()
                     }
 
                     "Load Sample Data" -> {
@@ -235,7 +221,6 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "Sample data loaded", Toast.LENGTH_SHORT).show()
                     }
                 }
-
                 true
             }
 
@@ -246,6 +231,8 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToMain(name: String) {
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("student_name", name)
+        // Clear the back stack so Back from MainActivity doesn't return to login
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
     }

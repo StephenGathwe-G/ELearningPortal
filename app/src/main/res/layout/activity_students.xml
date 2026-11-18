@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/backgroundColor">
+    android:background="@color/background">
 
     <!-- Title -->
     <TextView
         android:id="@+id/tvStudentsTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Registered Students"
+        android:text="@string/registered_students"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:textColor="@color/primaryColor"
+        android:textColor="@color/text_primary"
         android:gravity="center"
         android:padding="20dp"
         android:layout_marginTop="16dp"
@@ -43,7 +43,7 @@
         android:id="@+id/btnDeleteAll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Delete All"
+        android:text="@string/delete_all"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginStart="16dp"
