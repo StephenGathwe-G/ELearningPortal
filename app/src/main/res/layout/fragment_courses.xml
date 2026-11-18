@@ -7,23 +7,6 @@
     android:background="@color/background"
     android:padding="20dp">
 
-    <!-- University Branding -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/elearning_portal"
-        android:textColor="@color/primary"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Empowering Minds, Inspiring Excellence."
-        android:textColor="@color/text_secondary"
-        android:textSize="12sp"
-        android:layout_marginTop="4dp"/>
-
     <!-- Page Heading -->
     <TextView
         android:layout_width="match_parent"
@@ -45,7 +28,7 @@
 
     <!-- Search Field -->
     <EditText
-        android:id="@+id/courseSearch"
+        android:id="@+id/etSearchCourse"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:hint="Search courses..."
@@ -72,7 +55,7 @@
 
     <!-- ListView -->
     <ListView
-        android:id="@+id/coursesListView"
+        android:id="@+id/listCourses"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -85,7 +68,7 @@
 
     <!-- Refresh Button -->
     <Button
-        android:id="@+id/refreshCoursesButton"
+        android:id="@+id/btnRefreshCourses"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:text="Refresh Courses"

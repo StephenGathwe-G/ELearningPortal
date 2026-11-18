@@ -24,6 +24,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" android:exported="true" />
+        <activity
+            android:name=".StudentsActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+        <activity android:name=".SettingsActivity" android:exported="false" />
+
+
 
         <service
             android:name=".RegistrationService"

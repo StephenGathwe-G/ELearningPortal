@@ -1,18 +1,21 @@
 package com.example.elearningportal
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import com.example.elearningportal.database.AppDatabase
+import com.example.elearningportal.database.Course
 import com.example.elearningportal.database.Gender
 import com.example.elearningportal.database.Type
-import com.example.elearningportal.database.Course
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import android.content.Intent
-import androidx.activity.result.contract.ActivityResultContracts
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterFragment : Fragment() {
 
     private lateinit var registerFullName: EditText
     private lateinit var registerCourse: EditText
@@ -29,33 +32,52 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var db: AppDatabase
 
     // Background database operations
-    private val executor: ExecutorService =
-        Executors.newSingleThreadExecutor()
+    private val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_register)
+    private val notificationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { granted ->
+            if (!granted && isAdded) {
+                Toast.makeText(
+                    requireContext(),
+                    "Notifications are disabled",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
-        // Initialize database
-        db = AppDatabase.getInstance(this)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_register, container, false)
+    }
 
-        // Initialize views
-        registerFullName = findViewById(R.id.registerFullName)
-        registerCourse = findViewById(R.id.registerCourse)
-        registerAge = findViewById(R.id.registerAge)
-        genderSpinner = findViewById(R.id.genderSpinner)
-        studyModeGroup = findViewById(R.id.studyModeGroup)
-        yearSeekBar = findViewById(R.id.yearSeekBar)
-        yearValue = findViewById(R.id.yearValue)
-        termsCheckBox = findViewById(R.id.termsCheckbox)
-        registerStudentsButton = findViewById(R.id.registerStudentButton)
-        viewStudentsButton = findViewById(R.id.viewStudentsButton)
-        registerMenuButton = findViewById(R.id.registerMenuButton)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Initialize database using fragment context
+        db = AppDatabase.getInstance(requireContext())
+
+        // Initialize views from the inflated root view
+        registerFullName = view.findViewById(R.id.registerFullName)
+        registerCourse = view.findViewById(R.id.registerCourse)
+        registerAge = view.findViewById(R.id.registerAge)
+        genderSpinner = view.findViewById(R.id.genderSpinner)
+        studyModeGroup = view.findViewById(R.id.studyModeGroup)
+        yearSeekBar = view.findViewById(R.id.yearSeekBar)
+        yearValue = view.findViewById(R.id.yearValue)
+        termsCheckBox = view.findViewById(R.id.termsCheckbox)
+        registerStudentsButton = view.findViewById(R.id.registerStudentButton)
+        viewStudentsButton = view.findViewById(R.id.viewStudentsButton)
+        registerMenuButton = view.findViewById(R.id.registerMenuButton)
 
         // Handle year selection
         yearSeekBar.setOnSeekBarChangeListener(
             object : SeekBar.OnSeekBarChangeListener {
-
                 override fun onProgressChanged(
                     seekBar: SeekBar?,
                     progress: Int,
@@ -65,7 +87,6 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {}
             }
         )
@@ -80,16 +101,12 @@ class RegisterActivity : AppCompatActivity() {
 
         // View registered students
         viewStudentsButton.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Students screen not implemented yet",
-                Toast.LENGTH_SHORT
-            ).show()
+            val intent = Intent(requireContext(), StudentsActivity::class.java)
+            startActivity(intent)
         }
     }
 
     private fun registerStudent() {
-
         val fullName = registerFullName.text.toString().trim()
         val courseText = registerCourse.text.toString().trim()
         val ageText = registerAge.text.toString().trim()
@@ -112,15 +129,13 @@ class RegisterActivity : AppCompatActivity() {
         val course = try {
             Course.valueOf(courseText.uppercase())
         } catch (e: IllegalArgumentException) {
-            registerCourse.error =
-                "Enter BSE, BCS, BED, BSCIT or BCF"
+            registerCourse.error = "Enter BSE, BCS, BED, BSCIT or BCF"
             registerCourse.requestFocus()
             return
         }
 
         // Validate age
         val age = ageText.toIntOrNull()
-
         if (age == null || age !in 1..120) {
             registerAge.error = "Enter a valid age"
             registerAge.requestFocus()
@@ -128,16 +143,14 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         // Get gender
-        val genderText =
-            genderSpinner.selectedItem?.toString() ?: ""
-
+        val genderText = genderSpinner.selectedItem?.toString() ?: ""
         val gender = when (genderText) {
             "Male" -> Gender.Male
             "Female" -> Gender.Female
             "Other" -> Gender.Other
             else -> {
                 Toast.makeText(
-                    this,
+                    requireContext(),
                     "Please select a valid gender",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -146,12 +159,10 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         // Get study mode using RadioButton IDs
-        val selectedStudyMode =
-            studyModeGroup.checkedRadioButtonId
-
+        val selectedStudyMode = studyModeGroup.checkedRadioButtonId
         if (selectedStudyMode == -1) {
             Toast.makeText(
-                this,
+                requireContext(),
                 "Select your study mode",
                 Toast.LENGTH_SHORT
             ).show()
@@ -159,16 +170,12 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         val studyMode = when (selectedStudyMode) {
-
             R.id.fullTime -> Type.FullTime
-
             R.id.partTime -> Type.PartTime
-
             R.id.online -> Type.Online
-
             else -> {
                 Toast.makeText(
-                    this,
+                    requireContext(),
                     "Invalid study mode",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -181,8 +188,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // Validate terms
         if (!termsCheckBox.isChecked) {
-            termsCheckBox.error =
-                "Please accept the terms and conditions"
+            termsCheckBox.error = "Please accept the terms and conditions"
             return
         }
 
@@ -191,7 +197,6 @@ class RegisterActivity : AppCompatActivity() {
 
         // Insert student on background thread
         executor.execute {
-
             val result = try {
                 db.insert(
                     fullName,
@@ -205,32 +210,30 @@ class RegisterActivity : AppCompatActivity() {
                 -1L
             }
 
-            // Update UI on main thread
-            runOnUiThread {
+            // Update UI on main thread safely
+            activity?.runOnUiThread {
+                // Ensure fragment is still attached to avoid crashes
+                if (!isAdded) return@runOnUiThread
 
                 registerStudentsButton.isEnabled = true
 
                 if (result != -1L) {
-
                     Toast.makeText(
-                        this,
+                        requireContext(),
                         "Student registered successfully!",
                         Toast.LENGTH_LONG
                     ).show()
 
                     val serviceIntent = Intent(
-                        this,
+                        requireContext(),
                         RegistrationService::class.java
                     )
-
-                    startService(serviceIntent)
+                    requireContext().startService(serviceIntent)
 
                     clearForm()
-
                 } else {
-
                     Toast.makeText(
-                        this,
+                        requireContext(),
                         "Registration failed. Please try again.",
                         Toast.LENGTH_LONG
                     ).show()
@@ -249,59 +252,41 @@ class RegisterActivity : AppCompatActivity() {
         termsCheckBox.isChecked = false
         genderSpinner.setSelection(0)
     }
-    private val notificationPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { granted ->
-            if (!granted) {
-                Toast.makeText(
-                    this,
-                    "Notifications are disabled",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
 
     // Popup menu implementation
     private fun setupPopupMenu() {
-
-        registerMenuButton.setOnClickListener { view ->
-
-            val popup = PopupMenu(this, view)
+        registerMenuButton.setOnClickListener { anchorView ->
+            val popup = PopupMenu(requireContext(), anchorView)
 
             popup.menu.add("Clear Form")
             popup.menu.add("Load Sample Data")
 
             popup.setOnMenuItemClickListener { item ->
-
                 when (item.title.toString()) {
-
                     "Clear Form" -> {
-
                         clearForm()
-
                         Toast.makeText(
-                            this,
+                            requireContext(),
                             "Form cleared",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-
                     "Load Sample Data" -> {
-
                         registerFullName.setText("John Doe")
                         registerCourse.setText("BSE")
                         registerAge.setText("21")
+                        studyModeGroup.check(R.id.fullTime)
+                        genderSpinner.setSelection(1)
+                        yearSeekBar.progress=1
                         termsCheckBox.isChecked = true
 
                         Toast.makeText(
-                            this,
+                            requireContext(),
                             "Sample data loaded",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
-
                 true
             }
 
@@ -311,8 +296,6 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-
         executor.shutdown()
     }
-
 }
