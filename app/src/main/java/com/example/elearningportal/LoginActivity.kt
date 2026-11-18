@@ -60,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
         btnCancel = findViewById(R.id.btnCancel)
         tvForgot = findViewById(R.id.tvForgot)
         progressBar = findViewById(R.id.progressBar)
+        // If activity_login.xml has this button, uncomment the line below.
         // loginMenuButton = findViewById(R.id.loginMenuButton)
 
         restoreSavedCredentials()
@@ -132,7 +133,7 @@ class LoginActivity : AppCompatActivity() {
 
                 if (userName != null) {
                     // Credentials confirmed: start the session, then redirect.
-                    session.createSession(userName, email)
+                    session.createSession(userName, email, remember)
                     saveCredentials(remember, userName, email)
 
                     Toast.makeText(this, "Welcome, $userName!", Toast.LENGTH_SHORT).show()
