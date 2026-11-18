@@ -38,6 +38,17 @@
     <string name="last_login_not_available">Last login: Not available</string>
     <string name="registered_students">Registered Students</string>
     <string name="delete_all">Delete All</string>
+    <string name="settings">Settings</string>
+    <string name="elearning_portal">ELearning Portal</string>
+    <string name="customize_your_student_portal_experience">Customize your student portal experience</string>
+    <string name="general_preferences">General Preferences</string>
+    <string name="enable_notifications">Enable notifications</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="account_preferences">Account preferences</string>
+    <string name="preferred_username">Preferred username\n</string>
+    <string name="enter_preferred_username">Enter preferred username</string>
+    <string name="save_settings">Save settings\n</string>
+    <string name="reset_to_default">Reset to default</string>
     <string-array name="gender_options">
         <item>Select Gender</item>
         <item>Male</item>
