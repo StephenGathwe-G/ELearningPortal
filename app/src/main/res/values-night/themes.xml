@@ -4,24 +4,22 @@
     <style name="Base.Theme.ELearningPortal"
         parent="Theme.Material3.DayNight.NoActionBar">
 
-        <!-- Primary University Colors -->
+
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorOnPrimary">#101827</item>
+        <item name="colorOnPrimary">@color/surface</item>
 
         <item name="colorSecondary">@color/secondary</item>
-        <item name="colorOnSecondary">#101827</item>
+        <item name="colorOnSecondary">@color/surface</item>
 
         <item name="colorTertiary">@color/primary_button</item>
-        <item name="colorSurface">@color/surface</item>
+
+        <!-- Background Colors -->
         <item name="android:colorBackground">@color/background</item>
-
-        <!-- System Bars -->
-        <item name="android:statusBarColor">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="android:statusBarColor">@color/primary</item>
         <item name="android:navigationBarColor">@color/surface</item>
-
-        <!-- Light content on dark status bar -->
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar">false</item>
+<!--        <item name="android:windowLightNavigationBar">true</item>-->
 
     </style>
 

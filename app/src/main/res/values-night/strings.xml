@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome_student">Welcome, Student!</string>
+    <string name="cambridge_university">CAMBRIDGE UNIVERSITY</string>
+    <string name="empowering_students_through_quality_education_innovation_and_excellence">Empowering students through quality education, innovation and excellence.</string>
+    <string name="last_login_not_available">Last login: Not available</string>
+    <string name="registered_students">Registered Students</string>
+    <string name="delete_all">Delete All</string>
+</resources>

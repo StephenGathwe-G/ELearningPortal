@@ -13,11 +13,11 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- University Branding -->
+        <!--       branding-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/elearnig_portal"
+            android:text="@string/app_name"
             android:textColor="@color/primary"
             android:textSize="18sp"
             android:textStyle="bold"/>
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Empowering Minds, Inspiring Excellence."
+            android:text="@string/motto"
             android:textColor="@color/text_secondary"
             android:textSize="12sp"
             android:layout_marginTop="4dp"/>
@@ -48,7 +48,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Student Registration"
+                    android:text="@string/new_student_registration"
                     android:textColor="@color/primary"
                     android:textSize="23sp"
                     android:textStyle="bold"/>
@@ -56,7 +56,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Enter your details to begin enrollment."
+                    android:text="@string/enroll_details"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp"
                     android:layout_marginTop="6dp"/>
@@ -88,7 +88,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Full Name"
+                android:text="@string/full_name"
                 android:textColor="@color/text_primary"
                 android:textStyle="bold"
                 android:textSize="13sp"
@@ -109,7 +109,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enrolled Course"
+                android:text="@string/enrolled"
                 android:textColor="@color/text_primary"
                 android:textStyle="bold"
                 android:textSize="13sp"
@@ -120,18 +120,19 @@
                 android:id="@+id/registerCourse"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:hint="Enter your course"
+                android:background="@drawable/bg_login_input"
+                android:hint="@string/course"
                 android:inputType="textCapWords"
-                android:singleLine="true"
                 android:paddingHorizontal="14dp"
-                android:textSize="14sp"
-                android:background="@drawable/bg_login_input"/>
+                android:singleLine="true"
+                android:textColorHint="#546E7A"
+                android:textSize="14sp" />
 
             <!-- Age -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Age"
+                android:text="@string/age"
                 android:textColor="@color/text_primary"
                 android:textStyle="bold"
                 android:textSize="13sp"
@@ -142,7 +143,8 @@
                 android:id="@+id/registerAge"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:hint="Enter your age"
+                android:autofillHints=""
+                android:hint="@string/enter_your_age"
                 android:inputType="number"
                 android:maxLength="3"
                 android:singleLine="true"
@@ -154,7 +156,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Gender"
+                android:text="@string/gender"
                 android:textColor="@color/text_primary"
                 android:textStyle="bold"
                 android:textSize="13sp"
@@ -173,7 +175,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Study Mode"
+                android:text="@string/study_mode"
                 android:textColor="@color/text_primary"
                 android:textStyle="bold"
                 android:textSize="13sp"
@@ -190,7 +192,7 @@
                     android:id="@+id/fullTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Full-time"
+                    android:text="@string/full_time"
                     android:textColor="@color/text_secondary"
                     android:buttonTint="@color/primary_button"/>
 
@@ -198,10 +200,18 @@
                     android:id="@+id/partTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Part-time"
+                    android:text="@string/part_time"
                     android:textColor="@color/text_secondary"
                     android:buttonTint="@color/primary_button"
                     android:layout_marginStart="18dp"/>
+
+                <RadioButton
+                    android:id="@+id/online"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/online"
+                    android:textColor="@color/text_secondary"
+                    android:buttonTint="@color/primary_button" />
 
             </RadioGroup>
 
@@ -209,7 +219,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Year of Study"
+                android:text="@string/year_of_study"
                 android:textColor="@color/text_primary"
                 android:textStyle="bold"
                 android:textSize="13sp"
@@ -219,7 +229,7 @@
                 android:id="@+id/yearValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Year 1"
+                android:text="@string/year_1"
                 android:textColor="@color/primary_button"
                 android:textStyle="bold"
                 android:textSize="14sp"
@@ -239,7 +249,7 @@
                 android:id="@+id/termsCheckbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="I agree to the terms and conditions"
+                android:text="@string/i_agree_to_the_terms_and_conditions"
                 android:textColor="@color/text_secondary"
                 android:textSize="13sp"
                 android:buttonTint="@color/primary_button"
@@ -250,7 +260,7 @@
                 android:id="@+id/registerStudentButton"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:text="Register Student"
+                android:text="@string/register_student"
                 android:textAllCaps="false"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
@@ -262,7 +272,7 @@
                 android:id="@+id/viewStudentsButton"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:text="View Registered Students"
+                android:text="@string/view_registered_students"
                 android:textAllCaps="false"
                 android:textColor="@color/primary"
                 android:backgroundTint="@color/soft_blue"
@@ -275,7 +285,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="NORTHSTAR UNIVERSITY"
+            android:text="@string/app_name"
             android:textColor="@color/text_secondary"
             android:textSize="11sp"
             android:letterSpacing="0.15"

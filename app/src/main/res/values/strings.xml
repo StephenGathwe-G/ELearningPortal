@@ -1,32 +1,47 @@
 <resources>
     <string name="app_name">ELearning Portal</string>
-    <string name="school_logo">School logo</string>
-    <string name="elearnig_portal">ELEARNIG PORTAL</string>
-    <string name="welcome_please_login_to_continue">Welcome! Please login to continue.</string>
-    <string name="enter_student_name">Enter student name</string>
-    <string name="enter_student_email">Enter student email</string>
-    <string name="enter_access_password">Enter access password</string>
+    <string name="school_logo_description">School Logo</string>
+    <string name="student_name">Student Name</string>
+    <string name="student_name_autofill_hint">Your full name</string>
+    <string name="email_address">Email Address</string>
+    <string name="email_address_autofill_hint">you@example.com</string>
+    <string name="password">Password</string>
+    <string name="password_autofill_hint">Password should be more than 6 characters</string>
     <string name="remember_me">Remember Me</string>
-    <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
     <string name="forgot_password">Forgot Password?</string>
-    <string name="account_preferences">Account Preferences</string>
-    <string name="general_preferences">General Preferences</string>
-    <string name="customize_your_student_portal_experience">Customize your student portal experience.</string>
-    <string name="preferred_username">Preferred Username</string>
-    <string name="settings">Settings</string>
-
-    <string name="enable_notifications">Enable Notifications</string>
-    <string name="dark_mode">Dark Mode</string>
-    <string name="enter_preferred_username">Enter preferred username</string>
-    <string name="save_settings">Save Settings</string>
-    <string name="reset_to_default">Reset to Default</string>
-
+    <string name="age">Age</string>
+    <string name="course">Enter your course</string>
+    <string name="enrolled">Enrolled Course</string>
+    <string name="motto">Empowering Minds, Inspiring Excellence.</string>
+    <string name="enroll_details">Enter your details to begin enrollment.</string>
+    <string name="gender">Gender</string>
+    <string name="full_name">Full Name</string>
+    <string name="new_student_registration">New Student Registration</string>
+    <string name="study_mode">Study Mode</string>
+    <string name="year_of_study">Year of Study</string>
+    <string name="full_time">Full-time</string>
+    <string name="part_time">Part-time</string>
+    <string name="enter_your_age">Enter your age</string>
+    <string name="register_student">Register Student</string>
+    <string name="i_agree_to_the_terms_and_conditions">I agree to the terms and conditions</string>
+    <string name="year_1">Year 1</string>
+    <string name="view_registered_students">View Registered Students</string>
+    <string name="online">Online</string>
+    <string name="menu">menu</string>
+    <string name="login_subtitle">Sign in to continue learning</string>
+    <string name="school_campus">School campus</string>
+    <string name="welcome_student">Welcome, Student!</string>
+    <string name="cambridge_university">CAMBRIDGE UNIVERSITY</string>
+    <string name="empowering_students_through_quality_education_innovation_and_excellence">Empowering students through quality education, innovation and excellence.</string>
+    <string name="last_login_not_available">Last login: Not available</string>
+    <string name="registered_students">Registered Students</string>
+    <string name="delete_all">Delete All</string>
     <string-array name="gender_options">
         <item>Select Gender</item>
         <item>Male</item>
         <item>Female</item>
         <item>Prefer not to say</item>
     </string-array>
-
 </resources>

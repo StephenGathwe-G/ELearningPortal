@@ -1,152 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+
     android:background="@color/background">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true"
-        android:overScrollMode="never">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/elearnig_portal"
-                android:textColor="@color/primary"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-
-            <!-- Welcome Section -->
-            <TextView
-                android:id="@+id/welcomeMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Welcome back, Student!"
-                android:textColor="@color/text_primary"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginTop="24dp"/>
-
-            <!-- University Motto -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Empowering Minds, Inspiring Excellence."
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
-                android:layout_marginTop="8dp"/>
-
-            <!-- Campus Section -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Explore Our Campus"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="28dp"
-                android:layout_marginBottom="12dp"/>
-
-            <ImageView
-                android:id="@+id/campusImage"
-                android:layout_width="match_parent"
-                android:layout_height="190dp"
-                android:src="@drawable/campus"
-                android:scaleType="centerCrop"
-                android:background="@color/soft_blue"
-                android:contentDescription="Northstar University campus"/>
-
-            <!-- Quick Access Heading -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Quick Access"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="26dp"
-                android:layout_marginBottom="12dp"/>
-
-            <!-- Courses Card -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="18dp"
-                android:background="@drawable/bg_login_card"
-                android:elevation="2dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="My Courses"
-                    android:textColor="@color/primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Explore available academic programs"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp"
-                    android:layout_marginTop="6dp"/>
-
-            </LinearLayout>
-
-            <!-- Registration Card -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="18dp"
-                android:background="@drawable/bg_login_card"
-                android:elevation="2dp"
-                android:layout_marginTop="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Student Registration"
-                    android:textColor="@color/primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Register new student information"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp"
-                    android:layout_marginTop="6dp"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-    <!-- Persistent Bottom Navigation -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvSchoolName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/surface"
-        app:itemIconTint="@color/primary"
-        app:itemTextColor="@color/primary"
-        app:menu="@menu/bottom_navigation"/>
+        android:text="@string/cambridge_university"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="24dp"
 
-</LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- School Mission -->
+    <TextView
+        android:id="@+id/tvMission"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/empowering_students_through_quality_education_innovation_and_excellence"
+        android:textSize="16sp"
+        android:textColor="@color/text_primary"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="12dp"
+
+        app:layout_constraintTop_toBottomOf="@id/tvSchoolName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Campus Image -->
+    <ImageView
+        android:id="@+id/imgCampus"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:src="@drawable/campus_building"
+        android:scaleType="centerCrop"
+        android:background="@color/surface"
+        android:contentDescription="@string/school_campus"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+
+        app:layout_constraintTop_toBottomOf="@id/tvMission"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Welcome Message -->
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_student"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+
+        app:layout_constraintTop_toBottomOf="@id/imgCampus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Last Login -->
+    <TextView
+        android:id="@+id/tvLastLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/last_login_not_available"
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="12dp"
+
+        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
