@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -44,6 +45,10 @@ class SettingsActivity : AppCompatActivity() {
         preferredUsername = findViewById(R.id.preferredUsername)
         saveSettingsButton = findViewById(R.id.saveSettingsButton)
         resetSettingsButton = findViewById(R.id.resetSettingsButton)
+
+        findViewById<View>(R.id.btnSettingsBack)?.setOnClickListener {
+            finish()
+        }
 
         // Load saved preferences into the UI
         loadSettings()

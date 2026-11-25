@@ -1,70 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:padding="16dp"
-    android:background="@drawable/bg_login_card"
-    android:elevation="2dp">
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="@color/surface">
 
-    <!-- Student Avatar -->
-    <TextView
-        android:id="@+id/studentAvatar"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:gravity="center"
-        android:text="S"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:background="@drawable/bg_student_avatar"/>
-
-    <!-- Student Information -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginStart="14dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp">
 
+        <!-- Student Avatar -->
         <TextView
-            android:id="@+id/studentName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Student Name"
-            android:textColor="@color/primary"
-            android:textSize="15sp"
+            android:id="@+id/studentAvatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="S"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:maxLines="1"/>
+            android:background="@drawable/bg_avatar_circle"/>
 
-        <TextView
-            android:id="@+id/studentCourse"
-            android:layout_width="match_parent"
+        <!-- Student Information -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Computer Science"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp"
-            android:layout_marginTop="5dp"
-            android:maxLines="2"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="14dp">
 
-        <TextView
-            android:id="@+id/studentAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Age: 21"
-            android:textColor="@color/secondary"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/studentName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Student Name"
+                android:textColor="@color/primary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:maxLines="1"/>
+
+            <TextView
+                android:id="@+id/studentCourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Computer Science"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:layout_marginTop="5dp"
+                android:maxLines="2"/>
+
+            <TextView
+                android:id="@+id/studentAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age: 21"
+                android:textColor="@color/secondary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"/>
+
+        </LinearLayout>
+
+        <!-- Record Indicator -->
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/bg_student_indicator"/>
 
     </LinearLayout>
 
-    <!-- Record Indicator -->
-    <View
-        android:layout_width="8dp"
-        android:layout_height="8dp"
-        android:background="@drawable/bg_student_indicator"/>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

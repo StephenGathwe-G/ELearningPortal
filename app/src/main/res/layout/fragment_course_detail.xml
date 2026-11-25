@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
+    android:overScrollMode="never">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="30dp">
+
+        <!-- Top Navigation Row with Back Pill -->
+        <TextView
+            android:id="@+id/btnCourseDetailBack"
+            style="@style/PillBackButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Back"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Course Banner Image Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/surface">
+
+            <ImageView
+                android:id="@+id/imgCourseBanner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/campus_building"
+                android:contentDescription="Course Hero Image" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Course Title -->
+        <TextView
+            android:id="@+id/tvCourseTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Computer Science"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- Course Code & Department -->
+        <TextView
+            android:id="@+id/tvCourseCodeDept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="BCS • Department of Computer Science"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- Badges Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvModulesBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip_selected"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:text="12 Modules"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvHoursBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_chip_unselected"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:text="48 Hours"
+                android:textColor="@color/text_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDeptBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_chip_unselected"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:text="Full Time"
+                android:textColor="@color/secondary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Description Section Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Course Description"
+            android:textColor="@color/text_primary"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/surface">
+
+            <TextView
+                android:id="@+id/tvCourseDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="4dp"
+                android:padding="18dp"
+                android:text="Comprehensive study of software engineering, algorithms, computing architecture, and software design principles."
+                android:textColor="@color/text_primary"
+                android:textSize="14sp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Enrolled Students Section -->
+        <TextView
+            android:id="@+id/tvEnrolledHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Enrolled Students"
+            android:textColor="@color/text_primary"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/surface">
+
+            <TextView
+                android:id="@+id/tvEnrolledStudents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="4dp"
+                android:padding="18dp"
+                android:text="Loading enrolled students..."
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>

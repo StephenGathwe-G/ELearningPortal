@@ -1,353 +1,223 @@
 package com.example.elearningportal;
 
+import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu;
-import android.view.MenuItem;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.content.Intent;
-import android.app.AlertDialog;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.elearningportal.database.AppDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class CoursesFragment extends Fragment {
 
-    EditText etSearchCourse;
-    ListView listCourses;
-    Button btnRefreshCourses;
+    private EditText etSearchCourse;
+    private RecyclerView recyclerCourses;
+    private Button btnAddCourse;
+    private Button btnRefreshCourses;
 
-    ArrayList<Course> allCourses;
-    ArrayList<Course> filteredCourses;
+    private AppDatabase db;
+    private CourseAdapter adapter;
 
-    CourseAdapter adapter;
+    private final List<CourseData> allCourses = new ArrayList<>();
+    private final List<CourseData> filteredCourses = new ArrayList<>();
 
-    ExecutorService executor =
-            Executors.newSingleThreadExecutor();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    private static final int VIEW_COURSE = 1;
-    private static final int SHARE_COURSE = 2;
+    public static class CourseData {
+        public int id;
+        public String code;
+        public String title;
+        public String description;
+        public String department;
+        public int durationHours;
+        public int modulesCount;
+        public int imageRes;
+
+        public CourseData(int id, String code, String title, String description, String department, int durationHours, int modulesCount, int imageRes) {
+            this.id = id;
+            this.code = code;
+            this.title = title;
+            this.description = description;
+            this.department = department;
+            this.durationHours = durationHours;
+            this.modulesCount = modulesCount;
+            this.imageRes = imageRes;
+        }
+    }
 
     @Nullable
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_courses, container, false);
 
-        View view = inflater.inflate(
-                R.layout.fragment_courses,
-                container,
-                false);
+        db = AppDatabase.getInstance(requireContext());
 
-        // Connect XML components
-        etSearchCourse = view.findViewById(
-                R.id.etSearchCourse);
+        etSearchCourse = view.findViewById(R.id.etSearchCourse);
+        recyclerCourses = view.findViewById(R.id.recyclerCourses);
+        btnAddCourse = view.findViewById(R.id.btnAddCourse);
+        btnRefreshCourses = view.findViewById(R.id.btnRefreshCourses);
 
-        listCourses = view.findViewById(
-                R.id.listCourses);
-
-        btnRefreshCourses = view.findViewById(
-                R.id.btnRefreshCourses);
-
-        // Initialize course lists
-        allCourses = new ArrayList<>();
-        filteredCourses = new ArrayList<>();
-
-        // Load sample courses
-        loadSampleCourses();
-
-        // Create adapter
+        recyclerCourses.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new CourseAdapter();
-        listCourses.setAdapter(adapter);
+        recyclerCourses.setAdapter(adapter);
 
-        // Enable context menu
-        registerForContextMenu(listCourses);
+        etSearchCourse.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-        // Search courses
-        etSearchCourse.addTextChangedListener(
-                new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterCourses(s.toString());
+            }
 
-                    @Override
-                    public void beforeTextChanged(
-                            CharSequence s, int start,
-                            int count, int after) {
-                    }
-
-                    @Override
-                    public void onTextChanged(
-                            CharSequence s, int start,
-                            int before, int count) {
-
-                        filterCourses(s.toString());
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                    }
-                });
-
-        // Click course to view details
-        listCourses.setOnItemClickListener(
-                (parent, itemView, position, id) -> {
-
-                    Course course = filteredCourses.get(position);
-
-                    showCourseDetails(course);
-                });
-
-        // Refresh courses
-        btnRefreshCourses.setOnClickListener(v -> {
-            refreshCourses();
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
+
+        if (btnAddCourse != null) {
+            btnAddCourse.setOnClickListener(v -> openAddCourseFragment());
+        }
+
+        if (btnRefreshCourses != null) {
+            btnRefreshCourses.setOnClickListener(v -> loadCoursesFromDb());
+        }
+
+        loadCoursesFromDb();
 
         return view;
     }
 
-    // Sample course data
-    private void loadSampleCourses() {
-
-        allCourses.clear();
-
-        allCourses.add(new Course(
-                "Computer Science",
-                "Study of programming, algorithms and computing.",
-                R.drawable.brain));
-
-        allCourses.add(new Course(
-                "Software Engineering",
-                "Learn software development and system design.",
-                R.drawable.network_engineering));
-
-        allCourses.add(new Course(
-                "Information Technology",
-                "Study computer systems and IT support.",
-                R.drawable.tech));
-
-        allCourses.add(new Course(
-                "Business Information Systems",
-                "Learn how technology supports business operations.",
-                R.drawable.consultant));
-
-        allCourses.add(new Course(
-                "Computer Networking",
-                "Study network infrastructure and communication.",
-                R.drawable.software_application));
-
-        filteredCourses.clear();
-        filteredCourses.addAll(allCourses);
-    }
-
-    // Search/filter courses
-    private void filterCourses(String keyword) {
-
-        filteredCourses.clear();
-
-        for (Course course : allCourses) {
-
-            if (course.name.toLowerCase()
-                    .contains(keyword.toLowerCase())) {
-
-                filteredCourses.add(course);
-            }
-        }
-
-        adapter.notifyDataSetChanged();
-    }
-
-    // Display course details
-    private void showCourseDetails(Course course) {
-
-        new AlertDialog.Builder(requireContext())
-                .setTitle(course.name)
-                .setMessage(course.description)
-                .setPositiveButton("OK", null)
-                .show();
-    }
-
-    // Create Context Menu
     @Override
-    public void onCreateContextMenu(
-            ContextMenu menu,
-            View v,
-            ContextMenu.ContextMenuInfo menuInfo) {
-
-        super.onCreateContextMenu(menu, v, menuInfo);
-
-        menu.setHeaderTitle("Course Options");
-
-        menu.add(0, VIEW_COURSE, 0, "View Course");
-
-        menu.add(0, SHARE_COURSE, 1, "Share Course");
-    }
-
-    // Handle Context Menu selections
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-
-        if (item.getMenuInfo() instanceof
-                android.widget.AdapterView.AdapterContextMenuInfo) {
-
-            android.widget.AdapterView.AdapterContextMenuInfo info =
-                    (android.widget.AdapterView.AdapterContextMenuInfo)
-                            item.getMenuInfo();
-
-            int position = info.position;
-
-            if (position < 0 ||
-                    position >= filteredCourses.size()) {
-                return super.onContextItemSelected(item);
-            }
-
-            Course course = filteredCourses.get(position);
-
-            if (item.getItemId() == VIEW_COURSE) {
-
-                showCourseDetails(course);
-                return true;
-            }
-
-            if (item.getItemId() == SHARE_COURSE) {
-
-                shareCourse(course);
-                return true;
-            }
+    public void onResume() {
+        super.onResume();
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).showMainNavigation();
         }
-
-        return super.onContextItemSelected(item);
+        loadCoursesFromDb();
     }
 
-    // Share course using implicit Intent
-    private void shareCourse(Course course) {
-
-        Intent intent = new Intent(Intent.ACTION_SEND);
-
-        intent.setType("text/plain");
-
-        intent.putExtra(
-                Intent.EXTRA_TEXT,
-                course.name + "\n" + course.description);
-
-        startActivity(Intent.createChooser(
-                intent, "Share Course"));
-    }
-
-    // Refresh using background thread
-    private void refreshCourses() {
-
-        btnRefreshCourses.setEnabled(false);
-
+    private void loadCoursesFromDb() {
         executor.execute(() -> {
+            List<CourseData> list = new ArrayList<>();
+            try (Cursor cursor = db.queryAllCourses()) {
+                int idIdx = cursor.getColumnIndexOrThrow(AppDatabase.COLUMN_C_ID);
+                int codeIdx = cursor.getColumnIndexOrThrow(AppDatabase.COLUMN_C_CODE);
+                int titleIdx = cursor.getColumnIndexOrThrow(AppDatabase.COLUMN_C_TITLE);
+                int descIdx = cursor.getColumnIndexOrThrow(AppDatabase.COLUMN_C_DESC);
+                int deptIdx = cursor.getColumnIndexOrThrow(AppDatabase.COLUMN_C_DEPT);
+                int hoursIdx = cursor.getColumnIndexOrThrow(AppDatabase.COLUMN_C_HOURS);
+                int modIdx = cursor.getColumnIndexOrThrow(AppDatabase.COLUMN_C_MODULES);
+                int imgIdx = cursor.getColumnIndexOrThrow(AppDatabase.COLUMN_C_IMAGE);
 
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return;
+                while (cursor.moveToNext()) {
+                    int id = cursor.getInt(idIdx);
+                    String code = cursor.getString(codeIdx);
+                    String title = cursor.getString(titleIdx);
+                    String desc = cursor.getString(descIdx);
+                    String dept = cursor.getString(deptIdx);
+                    int hours = cursor.getInt(hoursIdx);
+                    int modules = cursor.getInt(modIdx);
+                    int imageRes = cursor.getInt(imgIdx);
+                    if (imageRes == 0) imageRes = R.drawable.brain;
+
+                    list.add(new CourseData(id, code, title, desc, dept, hours, modules, imageRes));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            if (!isAdded()) return;
-
-            requireActivity().runOnUiThread(() -> {
-
-                loadSampleCourses();
-
-                adapter.notifyDataSetChanged();
-
-                etSearchCourse.setText("");
-
-                btnRefreshCourses.setEnabled(true);
-
-                Toast.makeText(requireContext(),
-                        "Courses refreshed successfully",
-                        Toast.LENGTH_SHORT).show();
-            });
+            if (isAdded()) {
+                requireActivity().runOnUiThread(() -> {
+                    allCourses.clear();
+                    allCourses.addAll(list);
+                    filterCourses(etSearchCourse.getText().toString());
+                });
+            }
         });
     }
 
-    // Custom Adapter
-    class CourseAdapter extends BaseAdapter {
+    private void filterCourses(String query) {
+        filteredCourses.clear();
+        String lowerQuery = query.toLowerCase().trim();
+        for (CourseData c : allCourses) {
+            if (c.title.toLowerCase().contains(lowerQuery) ||
+                c.code.toLowerCase().contains(lowerQuery) ||
+                c.department.toLowerCase().contains(lowerQuery)) {
+                filteredCourses.add(c);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    private void openCourseDetailFragment(CourseData course) {
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, CourseDetailFragment.newInstance(course.id))
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void openAddCourseFragment() {
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, CourseAddEditFragment.newInstance(-1))
+                .addToBackStack(null)
+                .commit();
+    }
+
+    class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_course, parent, false);
+            return new ViewHolder(v);
+        }
 
         @Override
-        public int getCount() {
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            CourseData course = filteredCourses.get(position);
+
+            holder.courseName.setText(course.title + " (" + course.code + ")");
+            holder.courseDescription.setText(course.description);
+            holder.courseImage.setImageResource(course.imageRes);
+
+            holder.itemView.setOnClickListener(v -> openCourseDetailFragment(course));
+        }
+
+        @Override
+        public int getItemCount() {
             return filteredCourses.size();
         }
 
-        @Override
-        public Object getItem(int position) {
-            return filteredCourses.get(position);
-        }
+        class ViewHolder extends RecyclerView.ViewHolder {
+            ImageView courseImage;
+            TextView courseName;
+            TextView courseDescription;
 
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(
-                int position,
-                View convertView,
-                ViewGroup parent) {
-
-            View view = convertView;
-
-            if (view == null) {
-
-                view = LayoutInflater.from(requireContext())
-                        .inflate(
-                                R.layout.row_course,
-                                parent,
-                                false);
+            ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                courseImage = itemView.findViewById(R.id.courseImage);
+                courseName = itemView.findViewById(R.id.courseName);
+                courseDescription = itemView.findViewById(R.id.courseDescription);
             }
-
-            ImageView image = view.findViewById(
-                    R.id.imgCourse);
-
-            TextView name = view.findViewById(
-                    R.id.tvCourseName);
-
-            TextView description = view.findViewById(
-                    R.id.tvCourseDescription);
-
-            Course course = filteredCourses.get(position);
-
-            image.setImageResource(course.image);
-
-            name.setText(course.name);
-
-            description.setText(course.description);
-
-            return view;
-        }
-    }
-
-    // Course model
-    class Course {
-
-        String name;
-        String description;
-        int image;
-
-        Course(String name, String description, int image) {
-
-            this.name = name;
-            this.description = description;
-            this.image = image;
         }
     }
 

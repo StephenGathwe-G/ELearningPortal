@@ -33,7 +33,7 @@
     <string name="login_subtitle">Sign in to continue learning</string>
     <string name="school_campus">School campus</string>
     <string name="welcome_student">Welcome, Student!</string>
-    <string name="cambridge_university">CAMBRIDGE UNIVERSITY</string>
+    <string name="cambridge_university">ZETECH UNIVERSITY</string>
     <string name="empowering_students_through_quality_education_innovation_and_excellence">Empowering students through quality education, innovation and excellence.</string>
     <string name="last_login_not_available">Last login: Not available</string>
     <string name="registered_students">Registered Students</string>
@@ -49,6 +49,7 @@
     <string name="enter_preferred_username">Enter preferred username</string>
     <string name="save_settings">Save settings\n</string>
     <string name="reset_to_default">Reset to default</string>
+    <string name="welcome_back">Welcome back! 👋</string>
     <string-array name="gender_options">
         <item>Select Gender</item>
         <item>Male</item>

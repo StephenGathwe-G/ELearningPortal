@@ -3,8 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="@color/background">
+
+    <!-- Top Left Back Pill Button -->
+    <TextView
+        android:id="@+id/btnStudentsBack"
+        style="@style/PillBackButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="← Back"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <!-- Title -->
     <TextView
@@ -12,13 +23,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/registered_students"
-        android:textSize="26sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="@color/text_primary"
-        android:gravity="center"
-        android:padding="20dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnStudentsBack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -27,7 +36,8 @@
         android:id="@+id/listStudents"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:dividerHeight="1dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
         android:padding="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -39,13 +49,16 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Delete All -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnDeleteAll"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         android:text="@string/delete_all"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textStyle="bold"
+        android:textAllCaps="false"
+        app:cornerRadius="24dp"
+        android:backgroundTint="@color/error"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"

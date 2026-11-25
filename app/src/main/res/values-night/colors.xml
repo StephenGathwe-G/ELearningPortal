@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
-    <color name="primary">#8BAFF5</color>
+    <color name="primary">#3974D5</color>
     <color name="primary_button">#3974D5</color>
-    <color name="secondary">#42C4B8</color>
+    <color name="secondary">#20B2AA</color>
 
-    <color name="background">#101827</color>
-    <color name="surface">#19263A</color>
-    <color name="soft_blue">#263A59</color>
+    <!-- Dark Mode Palette: #121212 True Dark Background -->
+    <color name="background">#121212</color>
+    <color name="surface">#1E222B</color>
+    <color name="soft_blue">#253248</color>
 
-    <color name="text_primary">#F4F7FC</color>
-    <color name="text_secondary">#B0BDCF</color>
-    <color name="border">#304057</color>
+    <color name="text_primary">#F0F4F8</color>
+    <color name="text_secondary">#A0AEC0</color>
+    <color name="border">#2D3748</color>
 
-    <color name="success">#55C995</color>
-    <color name="warning">#F0BF63</color>
-    <color name="error">#F17C83</color>
+    <color name="success">#2EA043</color>
+    <color name="warning">#E3B341</color>
+    <color name="error">#F85149</color>
+    <color name="muted">#7D8590</color>
+    <color name="accent">#FF5353</color>
+
+    <!-- Additional UI Modernization colors -->
+    <color name="card_background">#1E222B</color>
+    <color name="chip_background">#253248</color>
+    <color name="dark_pill">#253248</color>
+    <color name="nav_icon_unselected">#7D8590</color>
+    <color name="nav_icon_selected">#3974D5</color>
 </resources>

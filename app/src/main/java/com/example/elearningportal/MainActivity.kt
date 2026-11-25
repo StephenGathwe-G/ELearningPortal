@@ -1,7 +1,12 @@
 package com.example.elearningportal
 
-import android.os.Bundle
 import android.content.Intent
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.ImageButton
+import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -9,12 +14,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-// Add these imports at the top of MainActivity.kt
-import android.view.Menu
-import android.view.MenuItem
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigation: BottomNavigationView
+    private lateinit var btnNavChevron: ImageButton
     private lateinit var session: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         session = SessionManager(this)
         if (!session.isLoggedIn()) {
             redirectToLogin()
-            return // don't run the rest of onCreate
+            return
         }
 
         val isDark = getSharedPreferences(SettingsActivity.PREFS_NAME, MODE_PRIVATE)
@@ -34,10 +38,6 @@ class MainActivity : AppCompatActivity() {
         )
 
         setContentView(R.layout.activity_main)
-
-        val studentName = intent.getStringExtra("student_name")
-            ?: session.userName.ifEmpty { "Student" }
-        // use studentName (e.g. display in a greeting TextView)
 
         // Handle system window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { view, insets ->
@@ -58,45 +58,124 @@ class MainActivity : AppCompatActivity() {
         // Configure toolbar
         val toolbar = findViewById<Toolbar>(R.id.mainToolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.title = "ELearning Portal"
 
-        supportActionBar?.title = "Elearning portal"
-
-        // Initialize bottom navigation
+        // Initialize bottom navigation and far-left chevron button
         bottomNavigation = findViewById(R.id.bottomNavigation)
+        btnNavChevron = findViewById(R.id.btnNavChevron)
 
-        bottomNavigation.setOnItemSelectedListener { item ->
+        showMainNavigation()
 
-            when (item.itemId) {
-
-                R.id.nav_home -> {
-                    // Display HomeFragment
-                    loadFragment(HomeFragment())
-                    true
-                }
-
-                R.id.nav_register -> {
-                    // Display RegisterFragment
-                    loadFragment(RegisterFragment())
-                    true
-                }
-
-                R.id.nav_courses -> {
-                    // Display CoursesFragment
-                    loadFragment(CoursesFragment())
-                    true
-                }
-
-                else -> false
-            }
-        }
-
-        // Load the default fragment only on first creation
+        // Load default fragment on first launch
         if (savedInstanceState == null) {
             bottomNavigation.selectedItemId = R.id.nav_home
         }
     }
 
-    // Catches sessions that expire while the app is in the background
+    fun showMainNavigation() {
+        if (!::btnNavChevron.isInitialized || !::bottomNavigation.isInitialized) return
+
+        btnNavChevron.visibility = View.GONE
+        bottomNavigation.menu.clear()
+        bottomNavigation.inflateMenu(R.menu.bottom_navigation)
+
+        btnNavChevron.setOnClickListener { view ->
+            showNavigationPopupMenu(view)
+        }
+
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    loadFragment(HomeFragment())
+                    true
+                }
+                R.id.nav_register -> {
+                    loadFragment(RegisterFragment())
+                    true
+                }
+                R.id.nav_courses -> {
+                    loadFragment(CoursesFragment())
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    fun showDetailNavigation(onEditRunnable: Runnable, onDeleteRunnable: Runnable) {
+        if (!::btnNavChevron.isInitialized || !::bottomNavigation.isInitialized) return
+
+        btnNavChevron.visibility = View.VISIBLE
+        bottomNavigation.menu.clear()
+        bottomNavigation.inflateMenu(R.menu.detail_actions_menu)
+
+        btnNavChevron.setOnClickListener {
+            showMainNavigation()
+            supportFragmentManager.popBackStack()
+        }
+
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_edit_course -> {
+                    onEditRunnable.run()
+                    true
+                }
+                R.id.action_delete_course -> {
+                    onDeleteRunnable.run()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun showNavigationPopupMenu(view: View) {
+        val popup = PopupMenu(this, view)
+        popup.menu.add(0, 1, 0, "🏠  Home Dashboard")
+        popup.menu.add(0, 2, 1, "📝  Register Student")
+        popup.menu.add(0, 3, 2, "📚  Explore Courses")
+        popup.menu.add(0, 4, 3, "👥  Registered Students")
+        popup.menu.add(0, 5, 4, "⚙️  Portal Settings")
+        popup.menu.add(0, 6, 5, "🚪  Logout")
+
+        popup.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                1 -> {
+                    showMainNavigation()
+                    bottomNavigation.selectedItemId = R.id.nav_home
+                    loadFragment(HomeFragment())
+                    true
+                }
+                2 -> {
+                    showMainNavigation()
+                    bottomNavigation.selectedItemId = R.id.nav_register
+                    loadFragment(RegisterFragment())
+                    true
+                }
+                3 -> {
+                    showMainNavigation()
+                    bottomNavigation.selectedItemId = R.id.nav_courses
+                    loadFragment(CoursesFragment())
+                    true
+                }
+                4 -> {
+                    startActivity(Intent(this, StudentsActivity::class.java))
+                    true
+                }
+                5 -> {
+                    startActivity(Intent(this, SettingsActivity::class.java))
+                    true
+                }
+                6 -> {
+                    logout()
+                    true
+                }
+                else -> false
+            }
+        }
+        popup.show()
+    }
+
     override fun onResume() {
         super.onResume()
         if (::session.isInitialized && !session.isLoggedIn()) redirectToLogin()
@@ -114,7 +193,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_logout -> {
-                logout() // Uses your existing logout() method
+                logout()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -128,7 +207,7 @@ class MainActivity : AppCompatActivity() {
         )
         finish()
     }
-    // Load selected fragment
+
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
@@ -136,7 +215,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    // Hook this up to a logout button or menu item
     private fun logout() {
         session.clear()
         redirectToLogin()

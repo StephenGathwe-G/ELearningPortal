@@ -3,6 +3,7 @@ package com.example.elearningportal
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.elearningportal.database.AppDatabase
@@ -52,6 +53,10 @@ class StudentsActivity : AppCompatActivity() {
         tvStudentsTitle = findViewById(R.id.tvStudentsTitle)
         listStudents = findViewById(R.id.listStudents)
         btnDeleteAll = findViewById(R.id.btnDeleteAll)
+
+        findViewById<View>(R.id.btnStudentsBack)?.setOnClickListener {
+            finish()
+        }
 
         // Set up ListView adapter
         adapter = ArrayAdapter(

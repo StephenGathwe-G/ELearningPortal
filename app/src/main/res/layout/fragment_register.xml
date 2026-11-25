@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -19,8 +20,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -33,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/new_student_registration"
                     android:textColor="@color/primary"
-                    android:textSize="23sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -42,7 +43,7 @@
                     android:text="@string/enroll_details"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp"
-                    android:layout_marginTop="6dp"/>
+                    android:layout_marginTop="4dp"/>
 
             </LinearLayout>
 
@@ -54,214 +55,218 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@android:drawable/ic_menu_more"
                 android:contentDescription="Registration options"
-                android:tint="@color/primary"/>
+                app:tint="@color/primary"/>
 
         </LinearLayout>
 
         <!-- Registration Form Card -->
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp"
-            android:background="@drawable/bg_login_card"
-            android:elevation="3dp">
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/surface">
 
-            <!-- Full Name -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/full_name"
-                android:textColor="@color/text_primary"
-                android:textStyle="bold"
-                android:textSize="13sp"
-                android:layout_marginBottom="7dp"/>
-
-            <EditText
-                android:id="@+id/registerFullName"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:hint="Enter your full name"
-                android:inputType="textPersonName"
-                android:singleLine="true"
-                android:paddingHorizontal="14dp"
-                android:textSize="14sp"
-                android:background="@drawable/bg_login_input"/>
-
-            <!-- Course -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/enrolled"
-                android:textColor="@color/text_primary"
-                android:textStyle="bold"
-                android:textSize="13sp"
-                android:layout_marginTop="17dp"
-                android:layout_marginBottom="7dp"/>
-
-            <EditText
-                android:id="@+id/registerCourse"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="@drawable/bg_login_input"
-                android:hint="@string/course"
-                android:inputType="textCapWords"
-                android:paddingHorizontal="14dp"
-                android:singleLine="true"
-                android:textColorHint="#546E7A"
-                android:textSize="14sp" />
-
-            <!-- Age -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/age"
-                android:textColor="@color/text_primary"
-                android:textStyle="bold"
-                android:textSize="13sp"
-                android:layout_marginTop="17dp"
-                android:layout_marginBottom="7dp"/>
-
-            <EditText
-                android:id="@+id/registerAge"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:autofillHints=""
-                android:hint="@string/enter_your_age"
-                android:inputType="number"
-                android:maxLength="3"
-                android:singleLine="true"
-                android:paddingHorizontal="14dp"
-                android:textSize="14sp"
-                android:background="@drawable/bg_login_input"/>
-
-            <!-- Gender -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/gender"
-                android:textColor="@color/text_primary"
-                android:textStyle="bold"
-                android:textSize="13sp"
-                android:layout_marginTop="17dp"
-                android:layout_marginBottom="7dp"/>
-
-            <Spinner
-                android:id="@+id/genderSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="@drawable/bg_login_input"
-                android:paddingHorizontal="10dp"
-                android:entries="@array/gender_options"/>
-
-            <!-- Study Mode -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/study_mode"
-                android:textColor="@color/text_primary"
-                android:textStyle="bold"
-                android:textSize="13sp"
-                android:layout_marginTop="17dp"/>
-
-            <RadioGroup
-                android:id="@+id/studyModeGroup"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <RadioButton
-                    android:id="@+id/fullTime"
+                <!-- Full Name Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/full_name"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    app:boxCornerRadiusTopStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/registerFullName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:singleLine="true"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Course Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:hint="@string/course"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    app:boxCornerRadiusTopStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/registerCourse"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:singleLine="true"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Age Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:hint="@string/age"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    app:boxCornerRadiusTopStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/registerAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:singleLine="true"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Gender -->
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/full_time"
-                    android:textColor="@color/text_secondary"
-                    android:buttonTint="@color/primary_button"/>
+                    android:text="@string/gender"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="6dp"/>
 
-                <RadioButton
-                    android:id="@+id/partTime"
+                <Spinner
+                    android:id="@+id/genderSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_login_input"
+                    android:paddingHorizontal="10dp"
+                    android:entries="@array/gender_options"/>
+
+                <!-- Study Mode -->
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/part_time"
+                    android:text="@string/study_mode"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:layout_marginTop="16dp"/>
+
+                <RadioGroup
+                    android:id="@+id/studyModeGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <RadioButton
+                        android:id="@+id/fullTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/full_time"
+                        android:textColor="@color/text_secondary"
+                        android:buttonTint="@color/primary_button"/>
+
+                    <RadioButton
+                        android:id="@+id/partTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/part_time"
+                        android:textColor="@color/text_secondary"
+                        android:buttonTint="@color/primary_button"
+                        android:layout_marginStart="14dp"/>
+
+                    <RadioButton
+                        android:id="@+id/online"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/online"
+                        android:textColor="@color/text_secondary"
+                        android:buttonTint="@color/primary_button" />
+
+                </RadioGroup>
+
+                <!-- Year of Study -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/year_of_study"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:layout_marginTop="16dp"/>
+
+                <TextView
+                    android:id="@+id/yearValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/year_1"
+                    android:textColor="@color/primary_button"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"/>
+
+                <SeekBar
+                    android:id="@+id/yearSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="3"
+                    android:progress="0"
+                    android:progressTint="@color/primary_button"
+                    android:thumbTint="@color/primary_button"/>
+
+                <!-- Terms -->
+                <CheckBox
+                    android:id="@+id/termsCheckbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/i_agree_to_the_terms_and_conditions"
                     android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
                     android:buttonTint="@color/primary_button"
-                    android:layout_marginStart="18dp"/>
+                    android:layout_marginTop="14dp"/>
 
-                <RadioButton
-                    android:id="@+id/online"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/online"
-                    android:textColor="@color/text_secondary"
-                    android:buttonTint="@color/primary_button" />
+                <!-- Register Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/registerStudentButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="@string/register_student"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    app:cornerRadius="24dp"
+                    android:backgroundTint="@color/primary_button"
+                    android:layout_marginTop="20dp"/>
 
-            </RadioGroup>
+                <!-- View Students Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/viewStudentsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="@string/view_registered_students"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary"
+                    app:cornerRadius="24dp"
+                    android:backgroundTint="@color/soft_blue"
+                    android:layout_marginTop="10dp"/>
 
-            <!-- Year of Study -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/year_of_study"
-                android:textColor="@color/text_primary"
-                android:textStyle="bold"
-                android:textSize="13sp"
-                android:layout_marginTop="17dp"/>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/yearValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/year_1"
-                android:textColor="@color/primary_button"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:layout_marginTop="6dp"/>
-
-            <SeekBar
-                android:id="@+id/yearSeekBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="3"
-                android:progress="0"
-                android:progressTint="@color/primary_button"
-                android:thumbTint="@color/primary_button"/>
-
-            <!-- Terms -->
-            <CheckBox
-                android:id="@+id/termsCheckbox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/i_agree_to_the_terms_and_conditions"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp"
-                android:buttonTint="@color/primary_button"
-                android:layout_marginTop="14dp"/>
-
-            <!-- Register Button -->
-            <Button
-                android:id="@+id/registerStudentButton"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="@string/register_student"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="@color/primary_button"
-                android:layout_marginTop="22dp"/>
-
-            <!-- View Students Button -->
-            <Button
-                android:id="@+id/viewStudentsButton"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="@string/view_registered_students"
-                android:textAllCaps="false"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/soft_blue"
-                android:layout_marginTop="12dp"/>
-
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <!-- Footer -->
         <TextView

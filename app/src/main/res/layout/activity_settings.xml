@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -12,6 +13,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp">
+
+        <!-- Top Left Back Pill Button -->
+        <TextView
+            android:id="@+id/btnSettingsBack"
+            style="@style/PillBackButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Back"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"/>
 
         <!-- University Branding -->
         <TextView
@@ -28,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings"
-            android:layout_marginTop="28dp"/>
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:id="@+id/settingsDescription"
@@ -39,84 +50,98 @@
             android:layout_marginTop="6dp"
             android:layout_marginBottom="24dp"/>
 
-        <!-- General Preferences -->
-        <LinearLayout
+        <!-- General Preferences Card -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="18dp"
-            android:background="@drawable/bg_login_card"
-            android:elevation="2dp">
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/surface">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/general_preferences"
-                style="@style/PortalSectionStyle"
-                android:layout_marginBottom="14dp"/>
-
-            <Switch
-                android:id="@+id/notificationSwitch"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/enable_notifications"
-                android:textColor="@color/text_primary"
-                android:paddingVertical="8dp"
-                android:buttonTint="@color/primary_button"/>
+                android:orientation="vertical"
+                android:padding="18dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/border"
-                android:layout_marginVertical="12dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/general_preferences"
+                    style="@style/PortalSectionStyle"
+                    android:layout_marginBottom="14dp"/>
 
-            <CheckBox
-                android:id="@+id/darkModeCheckbox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/dark_mode"
-                android:textColor="@color/text_primary"
-                android:paddingVertical="8dp"
-                android:buttonTint="@color/primary_button"/>
+                <Switch
+                    android:id="@+id/notificationSwitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/enable_notifications"
+                    android:textColor="@color/text_primary"
+                    android:paddingVertical="8dp"
+                    android:buttonTint="@color/primary_button"/>
 
-        </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/border"
+                    android:layout_marginVertical="12dp"/>
 
-        <!-- Account Preferences -->
-        <LinearLayout
+                <CheckBox
+                    android:id="@+id/darkModeCheckbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dark_mode"
+                    android:textColor="@color/text_primary"
+                    android:paddingVertical="8dp"
+                    android:buttonTint="@color/primary_button"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Account Preferences Card -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="18dp"
-            android:background="@drawable/bg_login_card"
-            android:elevation="2dp"
-            android:layout_marginTop="18dp">
+            android:layout_marginTop="18dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/surface">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/account_preferences"
-                style="@style/PortalSectionStyle"
-                android:layout_marginBottom="14dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/preferred_username"
-                android:textColor="@color/text_primary"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="7dp"/>
-
-            <EditText
-                android:id="@+id/preferredUsername"
-                style="@style/PortalInputStyle"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:hint="@string/enter_preferred_username"
-                android:inputType="textPersonName"
-                android:singleLine="true"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account_preferences"
+                    style="@style/PortalSectionStyle"
+                    android:layout_marginBottom="14dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preferred_username"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="7dp"/>
+
+                <EditText
+                    android:id="@+id/preferredUsername"
+                    style="@style/PortalInputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="@string/enter_preferred_username"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <!-- Save Settings -->
         <Button

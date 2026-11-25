@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,27 +12,27 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Available Department Courses"
+        android:text="Department Courses Management"
         android:textColor="@color/primary"
-        android:textSize="23sp"
+        android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginTop="28dp"/>
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Discover academic programs and find the right path for your future."
+        android:text="Discover academic programs and manage university curriculum."
         android:textColor="@color/text_secondary"
         android:textSize="13sp"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp"/>
 
     <!-- Search Field -->
     <EditText
         android:id="@+id/etSearchCourse"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:hint="Search courses..."
+        android:layout_height="50dp"
+        android:hint="Search courses or code..."
         android:inputType="text"
         android:singleLine="true"
         android:drawableStart="@android:drawable/ic_menu_search"
@@ -39,43 +40,62 @@
         android:paddingHorizontal="14dp"
         android:textSize="14sp"
         android:textColor="@color/text_primary"
-        android:background="@drawable/bg_login_input"
+        android:background="@drawable/bg_search_pill"
         android:contentDescription="Search available courses"/>
 
-    <!-- Course List Heading -->
-    <TextView
+    <!-- Course List Header + Add Button -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Explore Programs"
-        android:textColor="@color/text_primary"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="12dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="12dp">
 
-    <!-- ListView -->
-    <ListView
-        android:id="@+id/listCourses"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="Explore Programs"
+            android:textColor="@color/text_primary"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddCourse"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="+ Add Course"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            android:backgroundTint="@color/primary_button"/>
+
+    </RelativeLayout>
+
+    <!-- RecyclerView for Courses -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCourses"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="12dp"
-        android:background="@android:color/transparent"
         android:clipToPadding="false"
         android:paddingBottom="8dp"
         android:scrollbars="vertical"/>
 
     <!-- Refresh Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRefreshCourses"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="Refresh Courses"
+        android:layout_height="50dp"
+        android:text="Refresh Course Database"
         android:textAllCaps="false"
         android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="@color/primary_button"
+        app:cornerRadius="24dp"
+        android:backgroundTint="@color/soft_blue"
+        android:textColor="@color/primary"
         android:drawableStart="@android:drawable/ic_popup_sync"
         android:drawablePadding="8dp"
         android:layout_marginTop="12dp"/>

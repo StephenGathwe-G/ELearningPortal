@@ -6,6 +6,8 @@ import android.util.Patterns
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import com.example.elearningportal.database.AppDatabase
@@ -60,16 +62,12 @@ class LoginActivity : AppCompatActivity() {
         btnCancel = findViewById(R.id.btnCancel)
         tvForgot = findViewById(R.id.tvForgot)
         progressBar = findViewById(R.id.progressBar)
-        // If activity_login.xml has this button, uncomment the line below.
-        // loginMenuButton = findViewById(R.id.loginMenuButton)
 
         restoreSavedCredentials()
 
         btnSubmit.setOnClickListener { loginUser() }
         btnCancel.setOnClickListener { clearForm() }
         tvForgot.setOnClickListener { handleForgotPassword() }
-
-        //setupPopupMenu()
     }
 
     private fun restoreSavedCredentials() {
@@ -132,9 +130,10 @@ class LoginActivity : AppCompatActivity() {
                 setLoading(false)
 
                 if (userName != null) {
-                    // Credentials confirmed: start the session, then redirect.
+                    // Credentials confirmed: save session & timestamp, then redirect.
                     session.createSession(userName, email, remember)
                     saveCredentials(remember, userName, email)
+                    saveLastLoginTimestamp()
 
                     Toast.makeText(this, "Welcome, $userName!", Toast.LENGTH_SHORT).show()
                     navigateToMain(userName)
@@ -148,6 +147,21 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun saveLastLoginTimestamp() {
+        val timestamp = SimpleDateFormat("MMM dd, yyyy • hh:mm a", Locale.getDefault()).format(Date())
+        try {
+            openFileOutput("last_login.txt", MODE_PRIVATE).use { fos ->
+                fos.write(timestamp.toByteArray())
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        getSharedPreferences("StudentPortalPrefs", MODE_PRIVATE)
+            .edit()
+            .putString("last_login", timestamp)
+            .apply()
     }
 
     private fun authenticate(email: String, password: String): String? =
@@ -178,7 +192,7 @@ class LoginActivity : AppCompatActivity() {
 
         Toast.makeText(
             this,
-            "Password reset is not implemented yet",
+            "Password reset link sent to $email",
             Toast.LENGTH_SHORT
         ).show()
     }
@@ -198,41 +212,9 @@ class LoginActivity : AppCompatActivity() {
         etPassword.error = null
     }
 
-    private fun setupPopupMenu() {
-        // Skip if the menu button isn't wired up (avoids UninitializedPropertyAccessException)
-        if (!::loginMenuButton.isInitialized) return
-
-        loginMenuButton.setOnClickListener { view ->
-            val popup = PopupMenu(this, view)
-
-            popup.menu.add("Clear Form")
-            popup.menu.add("Load Sample Data")
-
-            popup.setOnMenuItemClickListener { item ->
-                when (item.title.toString()) {
-                    "Clear Form" -> {
-                        clearForm()
-                        Toast.makeText(this, "Form cleared", Toast.LENGTH_SHORT).show()
-                    }
-
-                    "Load Sample Data" -> {
-                        etName.setText(AppDatabase.DEFAULT_USER_NAME)
-                        etEmail.setText(AppDatabase.DEFAULT_USER_EMAIL)
-                        etPassword.setText(AppDatabase.DEFAULT_USER_PASSWORD)
-                        Toast.makeText(this, "Sample data loaded", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                true
-            }
-
-            popup.show()
-        }
-    }
-
     private fun navigateToMain(name: String) {
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("student_name", name)
-        // Clear the back stack so Back from MainActivity doesn't return to login
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()

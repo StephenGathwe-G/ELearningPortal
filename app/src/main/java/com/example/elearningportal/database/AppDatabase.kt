@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.DatabaseUtils
 import android.util.Base64
+import com.example.elearningportal.R
 import java.security.MessageDigest
 import java.security.SecureRandom
 import javax.crypto.SecretKeyFactory
@@ -15,7 +16,8 @@ import javax.crypto.spec.PBEKeySpec
 enum class Gender {
     Male,
     Female,
-    Other
+    Other,
+    NotSay,
 }
 
 enum class Type {
@@ -32,19 +34,42 @@ enum class Course {
     BCF
 }
 
+data class CourseRecord(
+    val id: Int,
+    val code: String,
+    val title: String,
+    val description: String,
+    val department: String,
+    val durationHours: Int,
+    val modulesCount: Int,
+    val imageRes: Int
+)
+
 class AppDatabase private constructor(context: Context) :
     SQLiteOpenHelper(context.applicationContext, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_NAME = "elearning.db"
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 3
 
+        // Users Table
         const val TABLE_USERS = "users"
         const val COLUMN_USER_ID = "id"
         const val COLUMN_USER_NAME = "name"
         const val COLUMN_USER_EMAIL = "email"
         const val COLUMN_USER_PASSWORD_HASH = "password_hash"
         const val COLUMN_USER_SALT = "salt"
+
+        // Courses Table
+        const val TABLE_COURSES = "courses"
+        const val COLUMN_C_ID = "id"
+        const val COLUMN_C_CODE = "code"
+        const val COLUMN_C_TITLE = "title"
+        const val COLUMN_C_DESC = "description"
+        const val COLUMN_C_DEPT = "department"
+        const val COLUMN_C_HOURS = "duration_hours"
+        const val COLUMN_C_MODULES = "modules_count"
+        const val COLUMN_C_IMAGE = "image_res"
 
         // Seeded account (development only)
         const val DEFAULT_USER_NAME = "Admin Student"
@@ -55,7 +80,8 @@ class AppDatabase private constructor(context: Context) :
         private const val KEY_LENGTH_BITS = 256
         private const val SALT_BYTES = 16
 
-        const val TABLE_NAME = "tasks"
+        // Students Table
+        const val TABLE_NAME = "students"
         const val COLUMN_ID = "id"
         const val COLUMN_NAME = "name"
         const val COLUMN_COURSE = "course"
@@ -67,6 +93,7 @@ class AppDatabase private constructor(context: Context) :
         @Volatile
         private var instance: AppDatabase? = null
 
+        @JvmStatic
         fun getInstance(context: Context): AppDatabase {
             return instance ?: synchronized(this) {
                 instance ?: AppDatabase(context).also { instance = it }
@@ -89,10 +116,16 @@ class AppDatabase private constructor(context: Context) :
         """.trimIndent()
         )
         createUsersTable(db)
+        createCoursesTable(db)
+        seedDefaultCourses(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         if (oldVersion < 2) createUsersTable(db)
+        if (oldVersion < 3) {
+            createCoursesTable(db)
+            seedDefaultCourses(db)
+        }
     }
 
     private fun createUsersTable(db: SQLiteDatabase) {
@@ -109,7 +142,80 @@ class AppDatabase private constructor(context: Context) :
         )
     }
 
-    // ─── CRUD ───────────────────────────────────────────────
+    private fun createCoursesTable(db: SQLiteDatabase) {
+        db.execSQL(
+            """
+            CREATE TABLE IF NOT EXISTS $TABLE_COURSES (
+                $COLUMN_C_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_C_CODE TEXT NOT NULL UNIQUE,
+                $COLUMN_C_TITLE TEXT NOT NULL,
+                $COLUMN_C_DESC TEXT,
+                $COLUMN_C_DEPT TEXT NOT NULL,
+                $COLUMN_C_HOURS INTEGER NOT NULL DEFAULT 40,
+                $COLUMN_C_MODULES INTEGER NOT NULL DEFAULT 10,
+                $COLUMN_C_IMAGE INTEGER NOT NULL DEFAULT 0
+            )
+        """.trimIndent()
+        )
+    }
+
+    private fun seedDefaultCourses(db: SQLiteDatabase) {
+        if (DatabaseUtils.queryNumEntries(db, TABLE_COURSES) > 0) return
+
+        val sampleCourses = listOf(
+            ContentValues().apply {
+                put(COLUMN_C_CODE, "BCS")
+                put(COLUMN_C_TITLE, "Computer Science")
+                put(COLUMN_C_DESC, "Comprehensive study of software engineering, algorithms, computing architecture, and software design principles.")
+                put(COLUMN_C_DEPT, "Department of Computer Science")
+                put(COLUMN_C_HOURS, 48)
+                put(COLUMN_C_MODULES, 12)
+                put(COLUMN_C_IMAGE, R.drawable.brain)
+            },
+            ContentValues().apply {
+                put(COLUMN_C_CODE, "BSE")
+                put(COLUMN_C_TITLE, "Software Engineering")
+                put(COLUMN_C_DESC, "Master modern full-stack development, mobile applications, cloud solutions, and agile software development lifecycle.")
+                put(COLUMN_C_DEPT, "Department of Computing")
+                put(COLUMN_C_HOURS, 52)
+                put(COLUMN_C_MODULES, 14)
+                put(COLUMN_C_IMAGE, R.drawable.network_engineering)
+            },
+            ContentValues().apply {
+                put(COLUMN_C_CODE, "BSCIT")
+                put(COLUMN_C_TITLE, "Information Technology")
+                put(COLUMN_C_DESC, "Study computer systems, cybersecurity infrastructure, cloud computing, and IT service administration.")
+                put(COLUMN_C_DEPT, "Department of IT & Security")
+                put(COLUMN_C_HOURS, 44)
+                put(COLUMN_C_MODULES, 10)
+                put(COLUMN_C_IMAGE, R.drawable.tech)
+            },
+            ContentValues().apply {
+                put(COLUMN_C_CODE, "BCF")
+                put(COLUMN_C_TITLE, "Business Information Systems")
+                put(COLUMN_C_DESC, "Explore how technology drives modern enterprise management, business analytics, decision systems, and database strategy.")
+                put(COLUMN_C_DEPT, "Department of Business Analytics")
+                put(COLUMN_C_HOURS, 40)
+                put(COLUMN_C_MODULES, 10)
+                put(COLUMN_C_IMAGE, R.drawable.consultant)
+            },
+            ContentValues().apply {
+                put(COLUMN_C_CODE, "BED")
+                put(COLUMN_C_TITLE, "Computer Networking & Systems")
+                put(COLUMN_C_DESC, "Hands-on study of router architecture, network security protocols, wireless communication, and IoT systems.")
+                put(COLUMN_C_DEPT, "Department of Engineering")
+                put(COLUMN_C_HOURS, 46)
+                put(COLUMN_C_MODULES, 11)
+                put(COLUMN_C_IMAGE, R.drawable.software_application)
+            }
+        )
+
+        for (cv in sampleCourses) {
+            db.insert(TABLE_COURSES, null, cv)
+        }
+    }
+
+    // ─── STUDENTS CRUD ───────────────────────────────────────────────
 
     fun insert(name: String, year: String, type: Type, age: Int, gender: Gender, course: Course): Long {
         return writableDatabase.insert(TABLE_NAME, null, ContentValues().apply {
@@ -170,6 +276,82 @@ class AppDatabase private constructor(context: Context) :
         )
     }
 
+    // ─── COURSES CRUD ───────────────────────────────────────────────
+
+    fun insertCourse(
+        code: String,
+        title: String,
+        description: String,
+        department: String,
+        durationHours: Int = 40,
+        modulesCount: Int = 10,
+        imageRes: Int = R.drawable.brain
+    ): Long {
+        return writableDatabase.insert(TABLE_COURSES, null, ContentValues().apply {
+            put(COLUMN_C_CODE, code.trim())
+            put(COLUMN_C_TITLE, title.trim())
+            put(COLUMN_C_DESC, description.trim())
+            put(COLUMN_C_DEPT, department.trim())
+            put(COLUMN_C_HOURS, durationHours)
+            put(COLUMN_C_MODULES, modulesCount)
+            put(COLUMN_C_IMAGE, imageRes)
+        })
+    }
+
+    fun updateCourse(
+        id: Int,
+        code: String,
+        title: String,
+        description: String,
+        department: String,
+        durationHours: Int,
+        modulesCount: Int
+    ): Int {
+        val cv = ContentValues().apply {
+            put(COLUMN_C_CODE, code.trim())
+            put(COLUMN_C_TITLE, title.trim())
+            put(COLUMN_C_DESC, description.trim())
+            put(COLUMN_C_DEPT, department.trim())
+            put(COLUMN_C_HOURS, durationHours)
+            put(COLUMN_C_MODULES, modulesCount)
+        }
+        return writableDatabase.update(TABLE_COURSES, cv, "$COLUMN_C_ID = ?", arrayOf(id.toString()))
+    }
+
+    fun deleteCourse(id: Int): Int {
+        return writableDatabase.delete(TABLE_COURSES, "$COLUMN_C_ID = ?", arrayOf(id.toString()))
+    }
+
+    fun queryAllCourses(): Cursor {
+        return readableDatabase.query(
+            TABLE_COURSES,
+            arrayOf(
+                COLUMN_C_ID,
+                COLUMN_C_CODE,
+                COLUMN_C_TITLE,
+                COLUMN_C_DESC,
+                COLUMN_C_DEPT,
+                COLUMN_C_HOURS,
+                COLUMN_C_MODULES,
+                COLUMN_C_IMAGE
+            ),
+            null, null, null, null, "$COLUMN_C_ID ASC"
+        )
+    }
+
+    fun getStudentsCountForCourse(courseCode: String): Int {
+        return try {
+            DatabaseUtils.queryNumEntries(
+                readableDatabase,
+                TABLE_NAME,
+                "$COLUMN_COURSE = ?",
+                arrayOf(courseCode)
+            ).toInt()
+        } catch (e: Exception) {
+            0
+        }
+    }
+
     // ─── USERS / AUTH ───────────────────────────────────────
 
     /** Inserts the default user only if no users exist. Safe to call on every launch. */
@@ -213,4 +395,4 @@ class AppDatabase private constructor(context: Context) :
         val spec = PBEKeySpec(password.toCharArray(), salt, PBKDF2_ITERATIONS, KEY_LENGTH_BITS)
         return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).encoded
     }
-}   
+}

@@ -1,96 +1,293 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
+    android:overScrollMode="never">
 
-    android:background="@color/background">
-
-    <TextView
-        android:id="@+id/tvSchoolName"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cambridge_university"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="@color/primary"
-        android:gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="30dp">
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!-- Top Header: Greeting + Avatar -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <!-- School Mission -->
-    <TextView
-        android:id="@+id/tvMission"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/empowering_students_through_quality_education_innovation_and_excellence"
-        android:textSize="16sp"
-        android:textColor="@color/text_primary"
-        android:gravity="center"
-        android:lineSpacingExtra="4dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="12dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/imgUserAvatar"
+                android:orientation="vertical">
 
-        app:layout_constraintTop_toBottomOf="@id/tvSchoolName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <TextView
+                    android:id="@+id/tvWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/welcome_back"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
-    <!-- Campus Image -->
-    <ImageView
-        android:id="@+id/imgCampus"
-        android:layout_width="0dp"
-        android:layout_height="220dp"
-        android:src="@drawable/campus_building"
-        android:scaleType="centerCrop"
-        android:background="@color/surface"
-        android:contentDescription="@string/school_campus"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
+                <TextView
+                    android:id="@+id/tvSchoolName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/cambridge_university"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
 
-        app:layout_constraintTop_toBottomOf="@id/tvMission"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            </LinearLayout>
 
-    <!-- Welcome Message -->
-    <TextView
-        android:id="@+id/tvWelcome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome_student"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@color/text_primary"
-        android:gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
+            <!-- Circular User Avatar -->
+            <TextView
+                android:id="@+id/imgUserAvatar"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_avatar_circle"
+                android:gravity="center"
+                android:text="S"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        app:layout_constraintTop_toBottomOf="@id/imgCampus"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        </RelativeLayout>
 
-    <!-- Last Login -->
-    <TextView
-        android:id="@+id/tvLastLogin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/last_login_not_available"
-        android:textSize="14sp"
-        android:textColor="@color/text_secondary"
-        android:gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="12dp"
+        <!-- Search Bar -->
+        <EditText
+            android:id="@+id/etHomeSearch"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_search_pill"
+            android:contentDescription="Search courses or topics"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="12dp"
+            android:hint="Search courses, topics, software..."
+            android:inputType="text"
+            android:paddingHorizontal="16dp"
+            android:singleLine="true"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary"
+            android:textSize="14sp" />
 
-        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!-- Filter Chips Carousel -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:scrollbars="none">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chipAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_selected"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="9dp"
+                    android:text="All Programs"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/chipCS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="9dp"
+                    android:text="Computer Science"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/chipEng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="9dp"
+                    android:text="Engineering"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/chipBusiness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="9dp"
+                    android:text="Business"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <!-- Featured Section Header -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Featured Class"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/bg_chip_unselected"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="10 Class"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <!-- Featured Course Card 1 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardFeaturedCourse1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Course Image Banner -->
+                <ImageView
+                    android:id="@+id/imgCourseBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/campus_building"
+                    android:contentDescription="Featured course image" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Software Application Development"
+                        android:textColor="@color/primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="12 Modules • 48 Hours • Full Time"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Performance / Progress Summary Card -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:text="Learning Activity"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="34.2 Hours"
+                        android:textColor="@color/text_primary"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvLastLogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:text="Last login: Today"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Time spent learning this week"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>
